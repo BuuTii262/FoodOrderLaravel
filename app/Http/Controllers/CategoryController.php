@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -13,7 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('category.index');
+        $categories = Category::latest()->get();
+        
+        return view('category.index', compact('categories'));
     }
 
     /**
@@ -34,7 +39,26 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category_name' => 'required',
+            'status' => 'required',
+            'category_image' => 'required'
+        ]);
+
+
+        $category = new Category();
+        $category->name = $request->category_name;
+        if($request->hasFile('category_image'))
+        {
+            $file = $request->file('category_image');
+            $extension = $file->getClientOriginalExtension();
+            $file_name = 'category'.time().'.'.$extension;
+            $file->move('/home/saithihaaung/Pictures/FoodOrder/',$file_name);
+            $category->category_image = $file_name;
+        }
+        $category->status = $request->status;
+        $category->save();
+        return redirect('category')->with('successAlert','You have successfully Added');
     }
 
     /**
@@ -56,7 +80,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);//find id in Post model if exist compact it into return
+        return view('category.edit',compact('category'));
     }
 
     /**
@@ -68,7 +93,35 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'category_name' => 'required',
+            'status' => 'required',
+        ]);
+
+
+        $category = Category::find($id);
+        $category->name = $request->category_name;
+        
+        $category->status = $request->status;
+
+        if($request->hasFile('category_image'))
+        {
+
+            $destination = '/home/saithihaaung/Pictures/FoodOrder/'. $category->category_image;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+            $file = $request->file('category_image');
+            $extension = $file->getClientOriginalExtension();
+            $file_name = 'category'.time().'.'.$extension;
+            $file->move('/home/saithihaaung/Pictures/FoodOrder/',$file_name);
+            $category->category_image = $file_name;
+        }
+        
+        $category->update();
+
+        return redirect('/category')->with('successAlert','You have successfully Updated');
     }
 
     /**
@@ -79,6 +132,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $destination = '/home/saithihaaung/Pictures/FoodOrder/'.$category->category_image;
+        {
+            File::delete($destination);
+        }
+        $category->delete();
+        return redirect('/category')->with('successAlert','You have successfully delete');
     }
 }

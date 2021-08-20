@@ -49,7 +49,7 @@
                     <span class="tooltip">User</span>                   
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{url('category')}}">
                         <i class='bx bx-food-menu'></i>
                         <span class="links_name">Category</span>
                     </a>
@@ -73,7 +73,7 @@
             <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                        <img src="ironman.jpg" alt="">
+                        <img src="{{ asset('defaultPhoto/jisoo.jpg') }}" alt="">
                         <div class="name_job">
                             <div class="name">Thiha Aung</div>
                             <div class="job">ADMIN</div>

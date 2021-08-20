@@ -11,8 +11,9 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory, HasUuid;
+    protected $table = 'categories';
 
-    protected $fillable = ['name','status'];
+    protected $fillable = ['name', 'category_image', 'status'];
 
     protected $primaryKey = 'uuid';
 

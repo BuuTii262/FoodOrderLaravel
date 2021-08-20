@@ -8,3 +8,4 @@ btn.onclick = function(){
 searchbtn.onclick = function(){
     sidebar.classList.toggle("active");  
 };
+
