@@ -4,9 +4,9 @@
 
 <div class="jumbotron text-center bg-dark" style="position: sticky;">
     <h1 class="text-white"><i class='bx bx-food-menu'></i></h1>
-    <h3 class="text-white">Category</h3>
+    <h3 class="text-white">CATEGORY</h3>
     <div class="float-right mr-5">
-        <a href="" class="btn btn-primary btnAdd" data-toggle="modal" 
+        <a href="" class="btn btn-sm bg-white text-dark btnAdd" data-toggle="modal" 
         data-target="#AddModal">Add New</a>
         
     </div>
@@ -35,10 +35,6 @@
         </thead>
         <tbody>
 
-        @if(isset($categories))
-          
-        @endif
-
         @foreach($categories as $category)
                         <tr>
                             
@@ -51,7 +47,7 @@
 
                                 @else                                
 
-                                    <img src="{{ asset('defaultPhoto/jisoo.jpg') }}" width="50px"   
+                                    <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}" width="50px"   
                                     class="border border-dark rounded">
                               
                                 @endif

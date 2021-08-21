@@ -5,6 +5,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Eidt Category</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <div class="modal-body">
 
@@ -60,9 +63,9 @@
           <hr>
 
           <div class="form group d-flex justify-content-end">
-              <input type="submit" id="btnAdd" name="submit" class="btn btn-warning" value="update">
+              <input type="submit" id="btnAdd" name="submit" class="btn btn-md btn-warning" value="update">
               &nbsp;&nbsp;&nbsp; 
-              <button type="button" class="btn btn-default text-dark" 
+              <button type="button" class="btn btn-default text-dark " 
               data-dismiss="modal">Close</button>
           </div>
 

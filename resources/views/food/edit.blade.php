@@ -1,0 +1,155 @@
+<div id="EditModal{{$food->uuid}}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Food</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+      <form action="{{ url('food/'.$food->uuid) }}" method="POST" id="form" enctype="multipart/form-data">
+          @csrf
+          @method('PUT')
+            <div class="form group">
+                <label>Food Name</label>
+                <input type="text" name="food_name" class="form-control" id="name" 
+                value="{{$food->name}}">
+                
+            </div>
+            <br>
+
+            <div class="form-elememt">
+            <label>Category Image</label><br>
+                        
+                        <label>
+                            
+                            <img src="{{ asset('uploads/foodImage/'.$food->food_image) }}" id="imagePreview">
+                            <div>
+                                <span id="preview-default-text">+</span>
+                            </div>
+                            
+                        </label>                       
+          </div>
+          <input type="file" id="inputfile" name="food_image" class="form-control-file">
+
+            <br>
+
+            <div class="form group">
+                <label>Select Category</label>
+                <select name="category_id" class="form-control" id="category_id">
+                    <option value="{{$food->categories[0]->uuid}}" selected>{{$food->categories[0]->name}}</option>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->uuid }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <br>
+
+            <div class="form group">
+                <label>Price</label>
+                <input type="number" name="price" class="form-control" 
+                id="price" value="{{ $food->price ?? old('price') }}">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" rows="3"
+                class="form-control" placeholder="Enter Description...">
+                {{ $food->description }}</textarea>
+                
+            </div>
+            <br>
+
+            <div class="form group">
+                <label>Have</label>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input @error('have') is-invalid @enderror" 
+                    name="have" value="Yes" {{ $food->status == 'Yes' ? 'checked' : '' }}> 
+                    <label class="form-check-label">
+                    Yes
+                    </label>
+                    &nbsp; &nbsp; &nbsp;
+                    <input type="radio" class="form-check-input @error('have') is-invalid @enderror" 
+                    name="have" value="No" {{ $food->status == 'No' ? 'checked' : '' }}>
+                    <label class="form-check-label">
+                    No
+                    </label>
+                </div>
+                @error('have')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+            <br>
+            
+            <div class="form group">
+                <label>Status</label>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input @error('status') is-invalid @enderror" 
+                    name="status" value="Yes" {{ $food->have == 'Yes' ? 'checked' : '' }}> 
+                    <label class="form-check-label">
+                    Yes
+                    </label>
+                    &nbsp; &nbsp; &nbsp;
+                    <input type="radio" class="form-check-input @error('status') is-invalid @enderror" 
+                    name="status" value="No" {{ $food->have == 'No' ? 'checked' : '' }}>
+                    <label class="form-check-label">
+                    No
+                    </label>
+                </div>
+                @error('status')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+
+            <br>
+            <hr>
+
+            <div class="form group d-flex justify-content-end">
+                <input type="submit" id="btnAdd" name="submit" class="btn btn-md btn-warning" value="update">
+                &nbsp;&nbsp;&nbsp; 
+                <button type="button" class="btn btn-default btn-md text-dark" 
+                data-dismiss="modal">Close</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</div>
+</div>
+
+<script>
+  const inpFile = document.querySelector("#inputfile");
+  const imagePreview = document.querySelector("#imagePreview");
+  const previewText = document.querySelector("#preview-default-text");
+  
+  inpFile.addEventListener("change" , function(){
+    const file = this.files[0]
+    if(file){
+      const reader = new FileReader();
+
+      imagePreview.style.display = "block";
+      previewText.style.display = "none";
+
+      reader.addEventListener("load", function(){
+        console.log(this);
+        imagePreview.setAttribute("src", this.result);
+      });
+      reader.readAsDataURL(file);
+    }
+    else
+    {
+      imagePreview.style.display = null;
+      previewText.style.display = null;
+      imagePreview.setAttribute("src", this.result);
+    }
+  });
+
+</script>
