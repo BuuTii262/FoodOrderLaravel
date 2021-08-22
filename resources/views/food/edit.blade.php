@@ -17,8 +17,12 @@
           @method('PUT')
             <div class="form group">
                 <label>Food Name</label>
-                <input type="text" name="food_name" class="form-control" id="name" 
-                value="{{$food->name}}">
+                <input type="text" name="food_name" class="form-control @error('price') is-invalid @enderror" 
+                id="name" value="{{$food->name ?? old('food_name')}}">
+
+                @error('food_name')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
                 
             </div>
             <br>
@@ -41,27 +45,36 @@
 
             <div class="form group">
                 <label>Select Category</label>
-                <select name="category_id" class="form-control" id="category_id">
+                <select name="category_id" class="form-control form-control @error('category_id') is-invalid @enderror" id="category_id">
                     <option value="{{$food->categories[0]->uuid}}" selected>{{$food->categories[0]->name}}</option>
                     @foreach($categories as $category)
                     <option value="{{ $category->uuid }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
+                @error('category_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <br>
 
             <div class="form group">
                 <label>Price</label>
-                <input type="number" name="price" class="form-control" 
+                <input type="number" name="price" class="form-control form-control form-control @error('category_id') is-invalid @enderror" 
                 id="price" value="{{ $food->price ?? old('price') }}">
+                @error('price')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <br>
 
             <div class="form-group">
                 <label for="description">Description</label>
                 <textarea name="description" id="description" rows="3"
-                class="form-control" placeholder="Enter Description...">
-                {{ $food->description }}</textarea>
+                class="form-control form-control form-control @error('description') is-invalid @enderror" placeholder="Enter Description...">
+                {{ $food->description ??  old('description')}}</textarea>
+                @error('description')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
                 
             </div>
             <br>

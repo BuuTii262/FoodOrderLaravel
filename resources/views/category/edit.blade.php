@@ -17,8 +17,12 @@
           @method('PUT')
           <div class="form group">
               <label class="form-label">Category Name</label>
-              <input type="text" name="category_name" class="form-control" id="name" value="{{$category->name}}">
-          </div>
+              <input type="text" name="category_name" 
+              class="form-control @error('category_name') is-invalid @enderror" id="name" value="{{$category->name ?? old('category_name')}}">
+              @error('category_name')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
           <br>
 
           <div class="form-elememt">

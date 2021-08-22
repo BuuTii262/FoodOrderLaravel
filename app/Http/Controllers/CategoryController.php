@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 
 
 class CategoryController extends Controller
@@ -16,7 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::latest()->get();
+        $categories = Category::latest()->paginate(6);
+
+        Session::put('tasks_url', request()->fullUrl());
         
         return view('category.index', compact('categories'));
     }
@@ -121,6 +124,10 @@ class CategoryController extends Controller
         
         $category->update();
 
+        if(session('tasks_url')){
+            return redirect(session('tasks_url'));
+        }
+
         return redirect('/category')->with('successAlert','You have successfully Updated');
     }
 
@@ -138,6 +145,10 @@ class CategoryController extends Controller
             File::delete($destination);
         }
         $category->delete();
+        
+        if(session('tasks_url')){
+            return redirect(session('tasks_url'));
+        }
         return redirect('/category')->with('successAlert','You have successfully delete');
     }
 }

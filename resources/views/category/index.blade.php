@@ -26,7 +26,8 @@
   <div class="table-responsive"> 
       <table class="table table-hover">
         <thead class="bg-dark text-white">
-            <tr>             
+            <tr>
+                         
                 <th>NAME</th>
                 <th>IMAGE</th>
                 <th>STATUS</th>
@@ -75,6 +76,9 @@
         </tbody>
 
       </table>
+      <div class="pagination-block d-flex justify-content-center">
+      {{ $categories->links('layouts.paginationlink') }}
+      </div>
   </div>    
   
 <script>

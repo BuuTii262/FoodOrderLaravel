@@ -97,6 +97,9 @@
         </tbody>
 
       </table>
+      <div class="pagination-block d-flex justify-content-center">
+      {{ $foods->links('layouts.paginationlink') }}
+      </div>
   </div>    
   
 <script>

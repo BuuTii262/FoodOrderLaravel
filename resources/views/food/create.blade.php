@@ -17,7 +17,7 @@
             <div class="form group">
                 <label>Food Name</label>
                 <input type="text" name="food_name" 
-                class="form-control @error('food_name') is-invalid @enderror" id="name">
+                class="form-control @error('food_name') is-invalid @enderror" id="name" value="{{old('food_name')}}">
                 @error('food_name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -43,18 +43,25 @@
 
             <div class="form group">
                 <label>Select Category</label>
-                <select name="category_id" class="form-control" id="category_id">
+                <select name="category_id" class="form-control @error('category_id') is-invalid @enderror" id="category_id">
                     <option value="" selected disabled>Select Category</option>
                     @foreach($categories as $category)
                     <option value="{{ $category->uuid }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
+                @error('category_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <br>
 
             <div class="form group">
                 <label>Price</label>
-                <input type="number" name="price" class="form-control" id="price">
+                <input type="number" name="price" 
+                class="form-control @error('price') is-invalid @enderror" id="price" value="{{ old('price') }}">
+                @error('price')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <br>
 

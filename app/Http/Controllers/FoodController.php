@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Food;
+// use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session; 
+
 
 class FoodController extends Controller
 {
@@ -16,9 +19,12 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $foods = Food::latest()->get();
+        $foods = Food::latest()->paginate(6);
 
         $categories = Category::all();
+
+        Session::put('tasks_url', request()->fullUrl());
+        // echo Session::get('tasks_url');
         
         return view('food.index', compact('foods'))->with('categories',$categories);
     }
@@ -134,6 +140,10 @@ class FoodController extends Controller
         }
         
         $food->update();
+
+        if(session('tasks_url')){
+            return redirect(session('tasks_url'))->with('successAlert','You Have Successfully Updated Food');
+        }
         return redirect('/food')->with('successAlert','You Have Successfully Updated Food Information');
     }
 
@@ -151,6 +161,10 @@ class FoodController extends Controller
             File::delete($destination);
         }
         $food->delete();
+
+        if(session('tasks_url')){
+            return redirect(session('tasks_url'))->with('successAlert','You Have Successfully Delete Food');
+        }
         return redirect('/food')->with('successAlert','You Have Successfully Delete Food');
     }
 }
