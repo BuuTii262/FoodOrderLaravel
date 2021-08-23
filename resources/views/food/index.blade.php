@@ -2,12 +2,12 @@
 @section('content')
 
 
-<div class="jumbotron text-center bg-dark">
-    <h1 class="text-white"><i class='bx bx-food-menu'></i></h1>
+<div class="jumbotron text-center bg-dark" style="border-radius: 0px;">
+    <h1 class="text-white"><i class='bx bx-coffee-togo'></i></h1>
     <h3 class="text-white">FOOD</h3>
-    <div class="float-right mr-5">
+    <div class="float-right mr-3 mt-3">
         <a href="" class="btn btn-sm bg-white text-dark btnAdd" data-toggle="modal" 
-        data-target="#AddModal">Add New</a>
+        data-target="#AddModal"><i class='bx bx-plus-circle'></i> Add New</a>
         
     </div>
 </div>
@@ -47,13 +47,13 @@
             <td>
                 @if($food->food_image != "")
                                 
-                    <img src="{{ asset('uploads/foodImage/'.$food->food_image) }}" width="50px"  
-                    class="border border-dark rounded">
+                    <img src="{{ asset('uploads/foodImage/'.$food->food_image) }}"
+                    class="border border-dark image_list">
 
                 @else                                
 
-                <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}" width="50px"   
-                class="border border-dark rounded">
+                <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}"  
+                class="border border-dark image_list">
                               
                 @endif
                                 
@@ -81,11 +81,12 @@
                                     
                     <button type="button" class="btn btn-warning btn-sm" 
                     data-toggle="modal" data-target="#EditModal{{$food->uuid}}">
-                    Edit
+                    <i class='bx bx-edit-alt'></i> Edit
                     </button>
                                       
                     <button type="submit" class="btn btn-danger btn-sm" 
-                    onclick="return confirm('Are you want to delete it?')">Delete</button>
+                    onclick="return confirm('Are you want to delete it?')">
+                    <i class='bx bx-trash'></i> Delete</button>
                 </form>
             </td>
             @include('food.edit')

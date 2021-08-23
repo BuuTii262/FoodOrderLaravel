@@ -36,7 +36,9 @@
                 </li> -->
                 <li>
                     <a href="#">
-                        <i class='bx bx-grid-alt'></i>
+                        <i class='bx bx-home'></i>
+                        <!-- <i class='bx bxs-widget'></i> -->
+                        <!-- <i class='bx bx-category-alt'></i> -->
                         <span class="links_name">Dashboard</span>
                     </a>
                     <span class="tooltip">Dashboard</span>                   
@@ -50,7 +52,8 @@
                 </li>
                 <li>
                     <a href="{{url('category')}}">
-                        <i class='bx bx-food-menu'></i>
+                        <!-- <i class='bx bx-food-menu'></i> -->
+                        <i class='bx bx-category-alt'></i>
                         <span class="links_name">Category</span>
                     </a>
                     <span class="tooltip">Category</span>                   
@@ -64,7 +67,7 @@
                 </li>
                 <li>
                     <a href="#">
-                        <i class='bx bx-list-ul'></i>
+                        <i class='bx bx-cart-alt'></i>
                         <span class="links_name">Order</span>
                     </a>
                     <span class="tooltip">Order</span>                   

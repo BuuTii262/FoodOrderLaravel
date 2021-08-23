@@ -7,7 +7,8 @@ use App\Models\Food;
 // use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Session; 
+use Illuminate\Support\Facades\Session;
+
 
 
 class FoodController extends Controller
@@ -19,12 +20,19 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $foods = Food::latest()->paginate(6);
+        $foods = Food::latest()->paginate(5);
 
         $categories = Category::all();
 
         Session::put('tasks_url', request()->fullUrl());
         // echo Session::get('tasks_url');
+
+        // if (PHP_OS_FAMILY === "Windows") {
+        //     echo "Running on Windows";
+        //   } elseif (PHP_OS_FAMILY === "Linux") {
+        //     echo "Running on Linux";
+        //   }
+          
         
         return view('food.index', compact('foods'))->with('categories',$categories);
     }
