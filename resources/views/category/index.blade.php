@@ -13,15 +13,6 @@
 </div>
 
 @include('category.create')
-
-<div class="container">
-@if(Session('successAlert'))
-                <div class="alert alert-success alert-dismissibel show fade" role="alert">
-                    <strong>{{ Session('successAlert') }}</strong>
-                    <button class="close" data-dismiss="alert">&times;</button>
-                </div>
-@endif
-</div> 
               
   <div class="table-responsive"> 
       <table class="table table-hover">
@@ -43,6 +34,8 @@
                             <td>
                                 @if($category->category_image != "")
                                 
+                                    <!-- <img src="{{ storage_path('/home/saithihaaung/Pictures/FoodOrder/'.$category->category_image) }}" 
+                                    class="border border-dark image_list"> -->
                                     <img src="{{ storage_path('/home/saithihaaung/Pictures/FoodOrder/'.$category->category_image) }}" 
                                     class="border border-dark image_list">
 

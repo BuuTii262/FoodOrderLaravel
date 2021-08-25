@@ -8,6 +8,8 @@ use App\Models\Food;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 
 
@@ -25,13 +27,6 @@ class FoodController extends Controller
         $categories = Category::all();
 
         Session::put('tasks_url', request()->fullUrl());
-        // echo Session::get('tasks_url');
-
-        // if (PHP_OS_FAMILY === "Windows") {
-        //     echo "Running on Windows";
-        //   } elseif (PHP_OS_FAMILY === "Linux") {
-        //     echo "Running on Linux";
-        //   }
           
         
         return view('food.index', compact('foods'))->with('categories',$categories);
@@ -83,7 +78,7 @@ class FoodController extends Controller
             $food->food_image = $file_name;
         }
         $food->save();
-        return redirect('/food')->with('successAlert','You Have Successfully Added New Food');
+        return redirect('/food')->withSuccessMessage('You Have Successfully Added New Food');
     }
 
     /**
@@ -150,9 +145,9 @@ class FoodController extends Controller
         $food->update();
 
         if(session('tasks_url')){
-            return redirect(session('tasks_url'))->with('successAlert','You Have Successfully Updated Food');
+            return redirect(session('tasks_url'))->withSuccessMessage('Successfully Updated Food Data');
         }
-        return redirect('/food')->with('successAlert','You Have Successfully Updated Food Information');
+        return redirect('/food')->withSuccessMessage('Successfully Updated Food Data');
     }
 
     /**
@@ -171,8 +166,8 @@ class FoodController extends Controller
         $food->delete();
 
         if(session('tasks_url')){
-            return redirect(session('tasks_url'))->with('successAlert','You Have Successfully Delete Food');
+            return redirect(session('tasks_url'))->withSuccessMessage('Successfully Deleted');
         }
-        return redirect('/food')->with('successAlert','You Have Successfully Delete Food');
+        return redirect('/food')->withSuccessMessage('Successfully Deleted');
     }
 }

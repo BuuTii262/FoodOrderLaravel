@@ -35,7 +35,7 @@
                     <span class="tooltip">Search</span>                   
                 </li> -->
                 <li>
-                    <a href="#">
+                    <a href="{{url('admindashboard')}}" id="navList">
                         <i class='bx bx-home'></i>
                         <!-- <i class='bx bxs-widget'></i> -->
                         <!-- <i class='bx bx-category-alt'></i> -->
@@ -44,14 +44,14 @@
                     <span class="tooltip">Dashboard</span>                   
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#" id="navList">
                         <i class='bx bx-user-circle'></i>
                         <span class="links_name">User</span>
                     </a>
                     <span class="tooltip">User</span>                   
                 </li>
                 <li>
-                    <a href="{{url('category')}}">
+                    <a href="{{url('category')}}" id="navList">
                         <!-- <i class='bx bx-food-menu'></i> -->
                         <i class='bx bx-category-alt'></i>
                         <span class="links_name">Category</span>
@@ -59,14 +59,14 @@
                     <span class="tooltip">Category</span>                   
                 </li>
                 <li>
-                    <a href="{{url('food')}}">
+                    <a href="{{url('food')}}" id="navList">
                         <i class='bx bx-coffee-togo'></i>
                         <span class="links_name">Food</span>
                     </a>
                     <span class="tooltip">Food</span>                   
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="#" id="navList">
                         <i class='bx bx-cart-alt'></i>
                         <span class="links_name">Order</span>
                     </a>
@@ -91,6 +91,8 @@
     <div class="home_content">
     
         @yield('content')
+        @include('sweetalert::alert')
+
    
     </div>
     <script type="text/javascript" src="/js/nav.js"></script>

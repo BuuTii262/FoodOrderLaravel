@@ -32,7 +32,7 @@
                 <th>IMAGE</th>
                 <th>CATEGORY</th>
                 <th>PRICE</th>
-                <th>HAVE</th>
+                <th>AVAILABLE</th>
                 <th>STATUS</th>
                 <th>Action</th>
             </tr>

@@ -6,6 +6,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 
 class CategoryController extends Controller
@@ -21,6 +23,11 @@ class CategoryController extends Controller
 
         Session::put('tasks_url', request()->fullUrl());
         
+        // if (PHP_OS_FAMILY === "Windows") {
+        //     echo "Running on Windows";
+        //   } elseif (PHP_OS_FAMILY === "Linux") {
+        //     echo "Running on Linux";
+        //   }
         return view('category.index', compact('categories'));
     }
 
@@ -61,7 +68,7 @@ class CategoryController extends Controller
         }
         $category->status = $request->status;
         $category->save();
-        return redirect('category')->with('successAlert','You have successfully Added');
+        return redirect('category')->withSuccessMessage('Successfully Added');
     }
 
     /**
@@ -125,10 +132,11 @@ class CategoryController extends Controller
         $category->update();
 
         if(session('tasks_url')){
-            return redirect(session('tasks_url'));
+            return redirect(session('tasks_url'))->withSuccessMessage('Successfully Updated');
         }
 
-        return redirect('/category')->with('successAlert','You have successfully Updated');
+        return redirect('category')->withSuccessMessage('Successfully Updated');
+        
     }
 
     /**
@@ -147,8 +155,8 @@ class CategoryController extends Controller
         $category->delete();
         
         if(session('tasks_url')){
-            return redirect(session('tasks_url'));
+            return redirect(session('tasks_url'))->withSuccessMessage('Successfully Deleted');
         }
-        return redirect('/category')->with('successAlert','You have successfully delete');
+        return redirect('/category')->withSuccessMessage('Successfully Deleted');
     }
 }

@@ -28,7 +28,7 @@
             <br>
 
             <div class="form-elememt">
-            <label>Category Image</label><br>
+            <label>Food Image</label><br>
                         
                         <label>
                             
@@ -80,7 +80,7 @@
             <br>
 
             <div class="form group">
-                <label>Have</label>
+                <label>Available</label>
                 <div class="form-check">
                     <input type="radio" class="form-check-input @error('have') is-invalid @enderror" 
                     name="have" value="Yes" {{ $food->status == 'Yes' ? 'checked' : '' }}> 
