@@ -33,9 +33,7 @@
                         <label>
                             
                             <img src="{{ asset('uploads/foodImage/'.$food->food_image) }}" id="imagePreview">
-                            <div>
-                                <span id="preview-default-text">+</span>
-                            </div>
+                           
                             
                         </label>                       
           </div>
@@ -83,14 +81,14 @@
                 <label>Available</label>
                 <div class="form-check">
                     <input type="radio" class="form-check-input @error('have') is-invalid @enderror" 
-                    name="have" value="Yes" {{ $food->status == 'Yes' ? 'checked' : '' }}> 
-                    <label class="form-check-label">
+                    name="have" id="availableYes" value="Yes" {{ $food->status == 'Yes' ? 'checked' : '' }}> 
+                    <label class="form-check-label" for="availableYes">
                     Yes
                     </label>
                     &nbsp; &nbsp; &nbsp;
                     <input type="radio" class="form-check-input @error('have') is-invalid @enderror" 
-                    name="have" value="No" {{ $food->status == 'No' ? 'checked' : '' }}>
-                    <label class="form-check-label">
+                    name="have" id="availableNO" value="No" {{ $food->status == 'No' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="availableNO">
                     No
                     </label>
                 </div>
@@ -104,14 +102,14 @@
                 <label>Status</label>
                 <div class="form-check">
                     <input type="radio" class="form-check-input @error('status') is-invalid @enderror" 
-                    name="status" value="Yes" {{ $food->have == 'Yes' ? 'checked' : '' }}> 
-                    <label class="form-check-label">
+                    name="status" id="statusYes" value="Yes" {{ $food->have == 'Yes' ? 'checked' : '' }}> 
+                    <label class="form-check-label" for="statusYes">
                     Yes
                     </label>
                     &nbsp; &nbsp; &nbsp;
                     <input type="radio" class="form-check-input @error('status') is-invalid @enderror" 
-                    name="status" value="No" {{ $food->have == 'No' ? 'checked' : '' }}>
-                    <label class="form-check-label">
+                    name="status" id="statusNo" value="No" {{ $food->have == 'No' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="statusNo">
                     No
                     </label>
                 </div>
@@ -139,17 +137,15 @@
 </div>
 
 <script>
-  const inpFile = document.querySelector("#inputfile");
-  const imagePreview = document.querySelector("#imagePreview");
-  const previewText = document.querySelector("#preview-default-text");
+  let inpFile = document.querySelector("#inputfile");
+  let imagePreview = document.querySelector("#imagePreview");
   
   inpFile.addEventListener("change" , function(){
-    const file = this.files[0]
+    let file = this.files[0];
     if(file){
       const reader = new FileReader();
 
       imagePreview.style.display = "block";
-      previewText.style.display = "none";
 
       reader.addEventListener("load", function(){
         console.log(this);

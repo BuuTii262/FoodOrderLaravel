@@ -11,9 +11,15 @@ class AdminDashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('isAdminOrStaff');  
+       
+    }
+    
     public function index()
     {
-        return view('adminDashboard');
+        return view('back.adminDashboard');
     }
 
     /**

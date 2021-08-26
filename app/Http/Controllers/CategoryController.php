@@ -17,8 +17,18 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('isAdminOrStaff');  
+       
+    }
+
     public function index()
     {
+        if(session('success_message'))
+        {
+            Alert::success('Success', session('success_message'));
+        }
         $categories = Category::latest()->paginate(6);
 
         Session::put('tasks_url', request()->fullUrl());

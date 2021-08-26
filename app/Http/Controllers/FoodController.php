@@ -20,8 +20,18 @@ class FoodController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('isAdminOrStaff');  
+       
+    }
+
     public function index()
     {
+        if(session('success_message'))
+        {
+            Alert::success('Success', session('success_message'));
+        }
         $foods = Food::latest()->paginate(5);
 
         $categories = Category::all();
@@ -78,7 +88,7 @@ class FoodController extends Controller
             $food->food_image = $file_name;
         }
         $food->save();
-        return redirect('/food')->withSuccessMessage('You Have Successfully Added New Food');
+        return redirect('/food')->withSuccessMessage("Have Successfully Added New Food");
     }
 
     /**

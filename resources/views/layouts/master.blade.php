@@ -13,7 +13,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- Boxicon CDN link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
 </head>
 <body>
     <!-- side bar start -->
@@ -35,7 +34,7 @@
                     <span class="tooltip">Search</span>                   
                 </li> -->
                 <li>
-                    <a href="{{url('admindashboard')}}" id="navList">
+                    <a href="{{ url('admindashboard') }}" id="navList">
                         <i class='bx bx-home'></i>
                         <!-- <i class='bx bxs-widget'></i> -->
                         <!-- <i class='bx bx-category-alt'></i> -->
@@ -44,7 +43,7 @@
                     <span class="tooltip">Dashboard</span>                   
                 </li>
                 <li>
-                    <a href="#" id="navList">
+                    <a href="{{url('user')}}" id="navList">
                         <i class='bx bx-user-circle'></i>
                         <span class="links_name">User</span>
                     </a>
@@ -78,11 +77,27 @@
                     <div class="profile_details">
                         <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}" alt="">
                         <div class="name_job">
-                            <div class="name">Thiha Aung</div>
-                            <div class="job">ADMIN</div>
+                            <div class="name">{{Auth::user()->name}}</div>
+                            <div class="job">{{Auth::user()->roles[0]->name}}</div>
+                            
                         </div>
                     </div>
-                    <i class='bx bx-log-out' id="log_out"></i>
+                    <!-- <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                    <i class='bx bx-log-out' id="log_out"></i>
+                    </form> -->
+                    <!-- <a href="{{ route('logout') }}" class="text-decoration-none"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                                        <i class='bx bx-log-out' id="log_out"></i>
+                    </a> -->
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button onclick="return confirm('Are You Sure Want To Logout?')">
+                            <i class='bx bx-log-out' id="log_out"></i>
+                        </button>
+                    </form>
+                    
                 </div>
             </div>
 

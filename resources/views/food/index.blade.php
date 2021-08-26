@@ -119,11 +119,6 @@
         });
     }
     previewBeforeUpload("file-1");
-    previewBeforeUpload("file-2");
-
-
-
-
     </script>
 
 
