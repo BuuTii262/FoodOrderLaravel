@@ -13,40 +13,42 @@
 
         <div class="col-sm-3">
             <div class="card text-white mb-3 text-center">
-            <h1 class="card-header bg-dark"><i class='bx bx-user-circle'></i></h1>
+            <h2 class="card-header bg-dark"><i class='bx bx-user-circle'></i></h2>
             <div class="card-body text-dark">
-                <p class="card-title h4">73 Users</p>
-                <a href="#" class="btn btn-outline-dark btn-lg btn-block">View All</a>           
+                <p class="card-title h4 mb-3">{{count($alluser)}} Users</p>
+                
+                    <a href="{{url('user')}}" class="btn btn-outline-dark btn-md">View All</a> 
+                       
             </div>
             </div>
         </div>
 
         <div class="col-sm-3">
             <div class="card text-white mb-3 text-center">
-            <h1 class="card-header bg-dark"><i class='bx bx-category-alt'></i></h1>
+            <h2 class="card-header bg-dark"><i class='bx bx-category-alt'></i></h2>
             <div class="card-body text-dark">
-                <p class="card-title h4">7 Categories</p> 
-                <a href="{{url('category')}}" class="btn btn-outline-dark btn-lg btn-block">View All</a>           
+                <p class="card-title h4 mb-3">{{count($allcategory)}} Categories</p> 
+                <a href="{{url('category')}}" class="btn btn-outline-dark btn-md">View All</a>           
             </div>
             </div>
         </div>
 
         <div class="col-sm-3">
             <div class="card text-white mb-3 text-center">
-            <h1 class="card-header bg-dark"><i class='bx bx-coffee-togo'></i></h1>
+            <h2 class="card-header bg-dark"><i class='bx bx-coffee-togo'></i></h2>
             <div class="card-body text-dark">
-                <p class="card-title h4">30 Foods</p>
-                <a href="{{url('food')}}" class="btn btn-outline-dark btn-lg btn-block">View All</a>           
+                <p class="card-title h4 mb-3">{{count($allfood)}} Foods</p>
+                <a href="{{url('food')}}" class="btn btn-outline-dark btn-md">View All</a>           
             </div>
             </div>
         </div>
 
         <div class="col-sm-3">
             <div class="card text-white mb-3 text-center">
-            <h1 class="card-header bg-dark"><i class='bx bx-cart-alt'></i></h1>
+            <h2 class="card-header bg-dark"><i class='bx bx-cart-alt'></i></h2>
             <div class="card-body text-dark">
-                <p class="card-title h4">73 Orders</p>  
-                <a href="#" class="btn btn-outline-dark btn-lg btn-block">View All</a>           
+                <p class="card-title h4 mb-3">73 Orders</p>  
+                <a href="#" class="btn btn-outline-dark btn-md">View All</a>           
                          
             </div>
             </div>
@@ -135,45 +137,18 @@
                                 <tr>                                                                     
                                     <th>USER NAME</th>
                                     <th>MAIL</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>                                  
-                                    <td>Thiha Aung</td>
-                                    <td>tha.buutii26299@gmail.com</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Detals</button></td>
-                                </tr>
-
-                                <tr> 
-                                                                     
-                                    <td>Thiha Aung</td>
-                                    <td>tha.buutii26299@gmail.com</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Detals</button></td>
-                                </tr>
-
-                                <tr> 
-                                                                     
-                                    <td>Thiha Aung</td>
-                                    <td>tha.buutii26299@gmail.com</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Detals</button></td>
-                                </tr>
-
-                                <tr> 
-                                                                     
-                                    <td>Thiha Aung</td>
-                                    <td>tha.buutii26299@gmail.com</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Detals</button></td>
-                                </tr>
-                                <tr> 
-                                                                    
-                                    <td>Thiha Aung</td>
-                                    <td>tha.buutii26299@gmail.com</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Detals</button></td>
-                                </tr>
-
+                                @foreach($users as $user)
+                                    <tr>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->email}}</td>                                       
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        
                     </div>
 
                 </div>

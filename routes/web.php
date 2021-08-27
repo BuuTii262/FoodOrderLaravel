@@ -33,6 +33,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/user',[App\Http\Controllers\UserController::class, 'index']); 
     Route::get('/user/{id}/edit',[App\Http\Controllers\UserController::class, 'edit']); 
     Route::post('/user/{id}/update',[App\Http\Controllers\UserController::class, 'update']); 
+    Route::delete('/user/{id}/delete',[App\Http\Controllers\UserController::class, 'destroy']); 
 
 
     Route::get('/admin',[App\Http\Controllers\AdminController::class, 'index']); 

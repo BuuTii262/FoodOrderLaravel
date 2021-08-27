@@ -4,7 +4,7 @@
 
 <div class="jumbotron text-center bg-dark" style="border-radius: 0px;">
     <h1 class="text-white"><i class='bx bx-coffee-togo'></i></h1>
-    <h3 class="text-white">FOOD</h3>
+    <h3 class="text-white">Food</h3>
     <div class="float-right mr-3 mt-3">
         <a href="" class="btn btn-sm bg-white text-dark btnAdd" data-toggle="modal" 
         data-target="#AddModal"><i class='bx bx-plus-circle'></i> Add New</a>
@@ -34,7 +34,11 @@
                 <th>PRICE</th>
                 <th>AVAILABLE</th>
                 <th>STATUS</th>
+                @foreach(Auth::user()->roles as $role)
+                    @if($role->name == 'Admin')
                 <th>Action</th>
+                    @endif
+                @endforeach    
             </tr>
         </thead>
         <tbody>
@@ -74,11 +78,14 @@
             
             <td>{{ $food->status }}</td>
 
+            <!-- user with admin role can see and edit -->
+            @foreach(Auth::user()->roles as $role)
+                @if($role->name == 'Admin')
             <td>
                 <form action="{{ url('food/'.$food->uuid) }}" method="POST">
                     @csrf
                     @method('DELETE') 
-                                    
+                                 
                     <button type="button" class="btn btn-warning btn-sm" 
                     data-toggle="modal" data-target="#EditModal{{$food->uuid}}">
                     <i class='bx bx-edit-alt'></i> Edit
@@ -87,9 +94,14 @@
                     <button type="submit" class="btn btn-danger btn-sm" 
                     onclick="return confirm('Are you want to delete it?')">
                     <i class='bx bx-trash'></i> Delete</button>
+                        
+
                 </form>
             </td>
             @include('food.edit')
+                @endif
+            @endforeach
+            <!-- user with admin role can see and edit -->
 
         </tr>
                         

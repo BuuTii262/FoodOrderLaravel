@@ -8,9 +8,7 @@
     <link  href="/css/nav.css" rel="stylesheet">
     <link  href="/css/image.css" rel="stylesheet"> 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
     <!-- Boxicon CDN link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -49,6 +47,7 @@
                     </a>
                     <span class="tooltip">User</span>                   
                 </li>
+                <hr class="bg-white">
                 <li>
                     <a href="{{url('category')}}" id="navList">
                         <!-- <i class='bx bx-food-menu'></i> -->
@@ -64,12 +63,20 @@
                     </a>
                     <span class="tooltip">Food</span>                   
                 </li>
+                <hr class="bg-white">
                 <li>
                     <a href="#" id="navList">
                         <i class='bx bx-cart-alt'></i>
                         <span class="links_name">Order</span>
                     </a>
                     <span class="tooltip">Order</span>                   
+                </li>
+                <li>
+                    <a href="{{url('normaluser')}}" id="navList">
+                    <i class='bx bx-palette'></i>
+                        <span class="links_name">UserDashboard</span>
+                    </a>
+                    <span class="tooltip">UserDashboard</span>                   
                 </li>
             </ul>
             <div class="profile_content">
@@ -82,15 +89,6 @@
                             
                         </div>
                     </div>
-                    <!-- <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                    <i class='bx bx-log-out' id="log_out"></i>
-                    </form> -->
-                    <!-- <a href="{{ route('logout') }}" class="text-decoration-none"
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                                        <i class='bx bx-log-out' id="log_out"></i>
-                    </a> -->
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button onclick="return confirm('Are You Sure Want To Logout?')">
@@ -111,5 +109,8 @@
    
     </div>
     <script type="text/javascript" src="/js/nav.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

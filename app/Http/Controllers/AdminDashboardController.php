@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Food;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
@@ -19,7 +22,12 @@ class AdminDashboardController extends Controller
     
     public function index()
     {
-        return view('back.adminDashboard');
+        $alluser = User::all();
+        $allfood = Food::all();
+        $allcategory = Category::all();
+
+        $users = User::latest()->paginate(5);
+        return view('back.adminDashboard',compact('users','alluser','allfood','allcategory'));
     }
 
     /**

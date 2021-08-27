@@ -73,7 +73,7 @@ class CategoryController extends Controller
             $file = $request->file('category_image');
             $extension = $file->getClientOriginalExtension();
             $file_name = 'category'.time().'.'.$extension;
-            $file->move('/home/saithihaaung/Pictures/FoodOrder/',$file_name);
+            $file->move('uploads/categoryImage/',$file_name);
             $category->category_image = $file_name;
         }
         $category->status = $request->status;
@@ -127,7 +127,7 @@ class CategoryController extends Controller
         if($request->hasFile('category_image'))
         {
 
-            $destination = '/home/saithihaaung/Pictures/FoodOrder/'. $category->category_image;
+            $destination = '/uploads/categoryImage/'. $category->category_image;
             if(File::exists($destination))
             {
                 File::delete($destination);
@@ -135,7 +135,7 @@ class CategoryController extends Controller
             $file = $request->file('category_image');
             $extension = $file->getClientOriginalExtension();
             $file_name = 'category'.time().'.'.$extension;
-            $file->move('/home/saithihaaung/Pictures/FoodOrder/',$file_name);
+            $file->move('uploads/categoryImage/',$file_name);
             $category->category_image = $file_name;
         }
         
@@ -158,7 +158,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
-        $destination = '/home/saithihaaung/Pictures/FoodOrder/'.$category->category_image;
+        $destination = 'uploads/categoryImage/'.$category->category_image;
         {
             File::delete($destination);
         }

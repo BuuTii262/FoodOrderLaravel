@@ -32,10 +32,7 @@
                         
                         <label>
                             
-                            <img src="{{ asset('/home/saithihaaung/Pictures/FoodOrder/'.$category->category_image) }}" id="imagePreview">
-                            <div>
-                                <span id="preview-default-text">+</span>
-                            </div>
+                            <img src="{{ asset('uploads/categoryImage/'.$category->category_image) }}" id="imagePreview">
                             
                         </label>                       
           </div>

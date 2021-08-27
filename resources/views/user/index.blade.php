@@ -4,7 +4,7 @@
 
 <div class="jumbotron text-center bg-dark" style="border-radius: 0px;">
     <h1 class="text-white"><i class='bx bx-user-circle'></i></h1>
-    <h3 class="text-white">Users</h3>
+    <h3 class="text-white">User</h3>
 </div>
              
   <div class="table-responsive"> 
@@ -14,7 +14,11 @@
                     <th>NAME</th>
                     <th>EMAIL</th>
                     <th>ROLES</th>
-                    <th>ACTION</th>
+                    @foreach(Auth::user()->roles as $role)
+                        @if($role->name == 'Admin')
+                            <th>ACTION</th>
+                        @endif
+                    @endforeach
                 </tr>
             </thead>
             <tbody>
@@ -33,18 +37,27 @@
                                         
                                 @endif
                                 </td>
-                                <td>
-                                    <!-- <a href="{{ url('/user/'.$user->id.'/edit') }}" class="btn btn-dark btn-sm" >managerole</a> -->
                                 @foreach(Auth::user()->roles as $role)
                                     @if($role->name == 'Admin')
-                                        <button type="button" class="btn btn-dark btn-sm" 
+                                    <td>
+                                        <form action="{{ url('user/'.$user->id.'/delete') }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <!-- <a href="{{ url('/user/'.$user->id.'/edit') }}" class="btn btn-dark btn-sm" >managerole</a> -->                            
+                                            <button type="button" class="btn btn-dark btn-sm" 
                                             data-toggle="modal" data-target="#EditRoleModal{{$user->id}}">
                                             Manage Role
-                                        </button>
+                                            </button>
+
+                                            <button type="submit" class="btn btn-danger btn-sm" 
+                                                onclick="return confirm('Are you want to delete it?')">
+                                            <i class='bx bx-trash'></i> Delete</button>
+                                        </form>    
+                                            
+                                    </td>
+                                    @include('user.managerole')
                                     @endif
-                                @endforeach    
-                                </td>
-                                @include('user.managerole')
+                                @endforeach
                             </tr>
 
                             @endforeach
@@ -52,6 +65,9 @@
             </tbody>
 
         </table>
+        <div class="pagination-block d-flex justify-content-center">
+            {{ $users->links('layouts.paginationlink') }}
+        </div>
   </div>    
   
 @endsection

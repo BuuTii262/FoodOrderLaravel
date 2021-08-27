@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 
@@ -21,8 +22,9 @@ class UserController extends Controller
         {
             Alert::success('Success', session('success_message'));
         }
-        $users = User::all();
+        $users = User::paginate(5);
         $roles = Role::all();
+        Session::put('tasks_url', request()->fullUrl());
         return view('user.index',compact('users','roles'));
     }
 
@@ -40,7 +42,21 @@ class UserController extends Controller
         $roleIds =  $request->role_ids;
 
         $user->roles()->sync($roleIds);
+        if(session('tasks_url')){
+            return redirect(session('tasks_url'))->withSuccessMessage('You Have Successfully Change User Role');
+        }
 
-        return redirect('/user')->withSuccessMessage('You Have Successfully CHange User Role');
+        return redirect('/user')->withSuccessMessage('You Have Successfully Change User Role');
+    }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        
+        if(session('tasks_url')){
+            return redirect(session('tasks_url'))->withSuccessMessage('Successfully Deleted');
+        }
+        return redirect('/user')->withSuccessMessage('Successfully Deleted');
     }
 }
