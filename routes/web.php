@@ -32,7 +32,9 @@ Route::group(['middleware'=>'auth'], function(){
 
     Route::get('/user',[App\Http\Controllers\UserController::class, 'index']); 
     Route::get('/user/{id}/edit',[App\Http\Controllers\UserController::class, 'edit']); 
-    Route::post('/user/{id}/update',[App\Http\Controllers\UserController::class, 'update']); 
+    Route::post('/user/{id}/update',[App\Http\Controllers\UserController::class, 'update']);
+    Route::get('/user/{id}/editprofile',[App\Http\Controllers\UserController::class, 'editprofile']);
+    Route::post('/user/{id}/updateprofile',[App\Http\Controllers\UserController::class, 'updateprofile']); 
     Route::delete('/user/{id}/delete',[App\Http\Controllers\UserController::class, 'destroy']); 
 
 

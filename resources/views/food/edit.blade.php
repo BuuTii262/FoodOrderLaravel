@@ -32,14 +32,14 @@
                         
                         <label>
                             
-                            <img src="{{ asset('uploads/foodImage/'.$food->food_image) }}" id="imagePreview">
+                            <img src="{{ asset('uploads/foodImage/'.$food->food_image) }}" class="imagePreview{{$food->uuid}}">
                            
                             
                         </label>                       
           </div>
-          <input type="file" id="inputfile" name="food_image" class="form-control-file">
+          <input type="file" name="food_image" class="inputfile{{$food->uuid}}">
 
-            <br>
+            <br><br>
 
             <div class="form group">
                 <label>Select Category</label>
@@ -81,14 +81,14 @@
                 <label>Available</label>
                 <div class="form-check">
                     <input type="radio" class="form-check-input @error('have') is-invalid @enderror" 
-                    name="have" id="availableYes" value="Yes" {{ $food->status == 'Yes' ? 'checked' : '' }}> 
-                    <label class="form-check-label" for="availableYes">
+                    name="have" id="availableYes{{$food->uuid}}" value="Yes" {{ $food->status == 'Yes' ? 'checked' : '' }}> 
+                    <label class="form-check-label" for="availableYes{{$food->uuid}}">
                     Yes
                     </label>
                     &nbsp; &nbsp; &nbsp;
                     <input type="radio" class="form-check-input @error('have') is-invalid @enderror" 
-                    name="have" id="availableNO" value="No" {{ $food->status == 'No' ? 'checked' : '' }}>
-                    <label class="form-check-label" for="availableNO">
+                    name="have" id="availableNO{{$food->uuid}}" value="No" {{ $food->status == 'No' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="availableNO{{$food->uuid}}">
                     No
                     </label>
                 </div>
@@ -102,14 +102,14 @@
                 <label>Status</label>
                 <div class="form-check">
                     <input type="radio" class="form-check-input @error('status') is-invalid @enderror" 
-                    name="status" id="statusYes" value="Yes" {{ $food->have == 'Yes' ? 'checked' : '' }}> 
-                    <label class="form-check-label" for="statusYes">
+                    name="status" id="statusYes{{$food->uuid}}" value="Yes" {{ $food->have == 'Yes' ? 'checked' : '' }}> 
+                    <label class="form-check-label" for="statusYes{{$food->uuid}}">
                     Yes
                     </label>
                     &nbsp; &nbsp; &nbsp;
                     <input type="radio" class="form-check-input @error('status') is-invalid @enderror" 
-                    name="status" id="statusNo" value="No" {{ $food->have == 'No' ? 'checked' : '' }}>
-                    <label class="form-check-label" for="statusNo">
+                    name="status" id="statusNo{{$food->uuid}}" value="No" {{ $food->have == 'No' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="statusNo{{$food->uuid}}">
                     No
                     </label>
                 </div>
@@ -137,28 +137,20 @@
 </div>
 
 <script>
-  let inpFile = document.querySelector("#inputfile");
-  let imagePreview = document.querySelector("#imagePreview");
+  function previewBeforeUpdate(file,image){
+    // console.log(file);
+        document.querySelector("."+file).addEventListener("change",function(e){
+            if(e.target.files.length==0){
+                return;
+
+            }
+            let file = e.target.files[0];
+            let url = URL.createObjectURL(file);
+            document.querySelector("."+image).src = url;
+
+        });
+    }
   
-  inpFile.addEventListener("change" , function(){
-    let file = this.files[0];
-    if(file){
-      const reader = new FileReader();
-
-      imagePreview.style.display = "block";
-
-      reader.addEventListener("load", function(){
-        console.log(this);
-        imagePreview.setAttribute("src", this.result);
-      });
-      reader.readAsDataURL(file);
-    }
-    else
-    {
-      imagePreview.style.display = null;
-      previewText.style.display = null;
-      imagePreview.setAttribute("src", this.result);
-    }
-  });
+  previewBeforeUpdate("inputfile{{$food->uuid}}","imagePreview{{$food->uuid}}");
 
 </script>

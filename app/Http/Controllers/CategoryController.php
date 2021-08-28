@@ -68,6 +68,7 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->name = $request->category_name;
+        
         if($request->hasFile('category_image'))
         {
             $file = $request->file('category_image');
@@ -127,7 +128,7 @@ class CategoryController extends Controller
         if($request->hasFile('category_image'))
         {
 
-            $destination = '/uploads/categoryImage/'. $category->category_image;
+            $destination = 'uploads/categoryImage/'.$category->category_image;
             if(File::exists($destination))
             {
                 File::delete($destination);
@@ -135,6 +136,7 @@ class CategoryController extends Controller
             $file = $request->file('category_image');
             $extension = $file->getClientOriginalExtension();
             $file_name = 'category'.time().'.'.$extension;
+            
             $file->move('uploads/categoryImage/',$file_name);
             $category->category_image = $file_name;
         }

@@ -27,16 +27,16 @@
 
           <div class="form-elememt">
 
-                    <label>Category Image</label><br>
-                        <!-- <input type="file" id="file-2" name="category_image"> -->
+                    <label>Category Image</label>
+                    <br>
                         
                         <label>
                             
-                            <img src="{{ asset('uploads/categoryImage/'.$category->category_image) }}" id="imagePreview">
+                          <img src="{{ asset('uploads/categoryImage/'.$category->category_image) }}" class="imagePreview{{$category->uuid}}">
                             
                         </label>                       
           </div>
-          <input type="file" id="inputfile" name="category_image" class="form-control-file">
+          <input type="file" name="category_image" class="inputfile{{$category->uuid}}">
 
           <br>
           <br>
@@ -44,15 +44,15 @@
           <div class="form group">
               <label>Status</label>
               <div class="form-check">
-                <input type="radio" id="status" class="form-check-input @error('status') is-invalid @enderror" 
+                <input type="radio" id="statusYes{{$category->uuid}}" class="form-check-input @error('status') is-invalid @enderror" 
                 name="status" value="Yes" {{ $category->status == 'Yes' ? 'checked' : '' }} > 
-                <label class="form-check-label">
+                <label class="form-check-label" for="statusYes{{$category->uuid}}">
                   Yes
                 </label>
                 &nbsp; &nbsp; &nbsp;
-                <input type="radio" id="status" class="form-check-input @error('status') is-invalid @enderror" 
+                <input type="radio" id="statusNo{{$category->uuid}}" class="form-check-input @error('status') is-invalid @enderror" 
                 name="status" value="No" {{ $category->status == 'No' ? 'checked' : '' }} >
-                <label class="form-check-label">
+                <label class="form-check-label" for="statusNo{{$category->uuid}}">
                   No
                 </label>
               </div>
@@ -78,30 +78,22 @@
 </div>
 
 <script>
-  const inpFile = document.querySelector("#inputfile");
-  const imagePreview = document.querySelector("#imagePreview");
-  const previewText = document.querySelector("#preview-default-text");
+
+  function previewBeforeUpdate(file,image){
+
+        document.querySelector("."+file).addEventListener("change",function(e){
+            if(e.target.files.length==0){
+                return;
+
+            }
+            let file = e.target.files[0];
+            let url = URL.createObjectURL(file);
+            document.querySelector("."+image).src = url;
+            
+
+        });
+    }
   
-  inpFile.addEventListener("change" , function(){
-    const file = this.files[0]
-    if(file){
-      const reader = new FileReader();
-
-      imagePreview.style.display = "block";
-      previewText.style.display = "none";
-
-      reader.addEventListener("load", function(){
-        console.log(this);
-        imagePreview.setAttribute("src", this.result);
-      });
-      reader.readAsDataURL(file);
-    }
-    else
-    {
-      imagePreview.style.display = null;
-      previewText.style.display = null;
-      imagePreview.setAttribute("src", this.result);
-    }
-  });
+  previewBeforeUpdate("inputfile{{$category->uuid}}","imagePreview{{$category->uuid}}");
 
 </script>

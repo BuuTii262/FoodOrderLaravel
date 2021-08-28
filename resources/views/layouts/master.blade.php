@@ -34,8 +34,6 @@
                 <li>
                     <a href="{{ url('admindashboard') }}" id="navList">
                         <i class='bx bx-home'></i>
-                        <!-- <i class='bx bxs-widget'></i> -->
-                        <!-- <i class='bx bx-category-alt'></i> -->
                         <span class="links_name">Dashboard</span>
                     </a>
                     <span class="tooltip">Dashboard</span>                   
@@ -50,8 +48,8 @@
                 <hr class="bg-white">
                 <li>
                     <a href="{{url('category')}}" id="navList">
-                        <!-- <i class='bx bx-food-menu'></i> -->
-                        <i class='bx bx-category-alt'></i>
+                        <i class='bx bx-food-menu'></i>
+                        
                         <span class="links_name">Category</span>
                     </a>
                     <span class="tooltip">Category</span>                   
@@ -82,9 +80,17 @@
             <div class="profile_content">
                 <div class="profile">
                     <div class="profile_details">
-                        <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}" alt="">
+                        @if(Auth::user()->user_image == 'defaultfood.jpg')
+                            <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}" alt="">
+                        @else
+                            <img src="{{ asset('uploads/userImage/'.Auth::user()->user_image) }}" alt="">
+                        @endif
                         <div class="name_job">
-                            <div class="name">{{Auth::user()->name}}</div>
+                            <div class="name">
+                                <a href="{{ url('/user/'.Auth::user()->id.'/editprofile') }}">
+                                    {{Auth::user()->name}}
+                                </a>
+                            </div>
                             <div class="job">{{Auth::user()->roles[0]->name}}</div>
                             
                         </div>
@@ -94,8 +100,7 @@
                         <button onclick="return confirm('Are You Sure Want To Logout?')">
                             <i class='bx bx-log-out' id="log_out"></i>
                         </button>
-                    </form>
-                    
+                    </form>                    
                 </div>
             </div>
 

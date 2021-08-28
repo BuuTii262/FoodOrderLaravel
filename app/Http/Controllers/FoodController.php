@@ -147,7 +147,7 @@ class FoodController extends Controller
             }
             $file = $request->file('food_image');
             $extension = $file->getClientOriginalExtension();
-            $file_name = time().'.'.$extension;
+            $file_name = "food".time().'.'.$extension;
             $file->move('uploads/foodImage/',$file_name);
             $food->food_image = $file_name;
         }
@@ -155,6 +155,7 @@ class FoodController extends Controller
         $food->update();
 
         if(session('tasks_url')){
+            echo "";
             return redirect(session('tasks_url'))->withSuccessMessage('Successfully Updated Food Data');
         }
         return redirect('/food')->withSuccessMessage('Successfully Updated Food Data');

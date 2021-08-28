@@ -3,7 +3,7 @@
 
 
 <div class="jumbotron text-center bg-dark" style="border-radius: 0px;">
-    <h1 class="text-white"><i class='bx bx-category-alt'></i></h1>
+    <h1 class="text-white"></h1><i class='bx bx-food-menu'></i>
     <h3 class="text-white">Category</h3>
     <div class="float-right mr-3 mt-3">
         <a href="" class="btn btn-sm bg-white text-dark btnAdd" data-toggle="modal" 
@@ -37,9 +37,7 @@
                             <td>{{ $category->name }}</td>
                             <td>
                                 @if($category->category_image != "")
-                                
-                                    <!-- <img src="{{ storage_path('/home/saithihaaung/Pictures/FoodOrder/'.$category->category_image) }}" 
-                                    class="border border-dark image_list"> -->
+
                                     <img src="{{ asset('uploads/categoryImage/'.$category->category_image) }}" 
                                     class="border border-dark image_list">
 
@@ -101,7 +99,6 @@
         });
     }
     previewBeforeUpload("file-1");
-    previewBeforeUpload("file-2");
 
 
 

@@ -200,6 +200,11 @@ body{
 .profile .profile_details .name{
     font-size: 15px;
     font-weight: 400;
+    
+}
+.profile .profile_details .name a{
+    text-decoration: none;
+    color: #fff;
 }
 .profile .profile_details .job{
     font-size: 12px;

@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File;
 
 use Illuminate\Http\Request;
 
@@ -58,5 +59,47 @@ class UserController extends Controller
             return redirect(session('tasks_url'))->withSuccessMessage('Successfully Deleted');
         }
         return redirect('/user')->withSuccessMessage('Successfully Deleted');
+    }
+    
+    public function editprofile($id){
+        $user = User::find($id);
+        return view('user.editprofile',compact('user'));
+    }
+
+    public function updateprofile(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+        ]);
+
+
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if($request->hasFile('user_image'))
+        {
+            $destination = 'uploads/userImage/'. $user->user_image;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+            $file = $request->file('user_image');
+            $extension = $file->getClientOriginalExtension();
+            $file_name = 'user'.time().'.'.$extension;
+            $file->move('uploads/userImage/',$file_name);
+            
+            $user->user_image = $file_name;
+        }
+
+        $user->update();
+
+        if(session('tasks_url')){
+            return redirect(session('tasks_url'))->withSuccessMessage('Successfully Updated Your Profile');
+        }
+
+        return redirect('admindashboard')->withSuccessMessage('Successfully Updated Your Profile');
+        
     }
 }
