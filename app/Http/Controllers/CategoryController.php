@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -29,7 +30,7 @@ class CategoryController extends Controller
         {
             Alert::success('Success', session('success_message'));
         }
-        $categories = Category::latest()->paginate(6);
+        $categories = Category::latest()->paginate(5);
 
         Session::put('tasks_url', request()->fullUrl());
         
@@ -39,6 +40,16 @@ class CategoryController extends Controller
         //     echo "Running on Linux";
         //   }
         return view('category.index', compact('categories'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+
+        $categories = DB::table('categories')->where('name','like','%'.$search.'%')->paginate(5);
+
+        return view('category.index', compact('categories'));
+
     }
 
     /**

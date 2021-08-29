@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="jumbotron text-center bg-dark" style="border-radius: 0px;">
-    <h1 class="text-white"><i class='bx bx-home'></i></h1>
+    <a class="text-white h1" href="{{url('admindashboard')}}"><i class='bx bx-home'></i></h1></a>
     <h3 class="text-white">Dashboard</h3>
 </div>
   

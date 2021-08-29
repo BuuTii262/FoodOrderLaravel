@@ -3,8 +3,19 @@
 
 
 <div class="jumbotron text-center bg-dark" style="border-radius: 0px;">
-    <h1 class="text-white"><i class='bx bx-user-circle'></i></h1>
+    <a class="text-white h1" href="{{url('/user')}}"><i class='bx bx-user-circle'></i></a>
     <h3 class="text-white">User</h3>
+    <div class="d-flex float-right mr-3 mt-3">
+        <form action="/searchuser" method="GET">                    
+            <div class="input-group class="float-left">
+                <input type="text" class="form-control bg-dark text-white border border-white border-top-0 border-left-0 border-right-0" name="search"
+                placeholder="Enter name to search" value="{{ old('search') }}">
+                <span class="input-group-prepend">
+                    <button type="submit" class="btn text-dark bg-white rounded-circle"><i class='bx bx-search-alt'></i></button>
+                </span>            
+            </div>                    
+        </form>
+    </div>    
 </div>
              
   <div class="table-responsive"> 

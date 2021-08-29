@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Food;
-// use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -39,7 +39,22 @@ class FoodController extends Controller
         Session::put('tasks_url', request()->fullUrl());
           
         
-        return view('food.index', compact('foods'))->with('categories',$categories);
+        return view('food.index', compact('foods','categories'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+
+        $foods = Food::where('name','like','%'.$search.'%')->paginate(5);
+
+        $categories = Category::all();
+
+            return view('food.index',compact('foods','categories'));
+
+        
+
+
     }
 
     /**
@@ -88,7 +103,11 @@ class FoodController extends Controller
             $food->food_image = $file_name;
         }
         $food->save();
-        return redirect('/food')->withSuccessMessage("Have Successfully Added New Food");
+
+        if(session('tasks_url')){
+            return redirect(session('tasks_url'))->withSuccessMessage('Successfully Added New Food');
+        }
+        return redirect('/food')->withSuccessMessage("Successfully Added New Food");
     }
 
     /**
@@ -155,7 +174,6 @@ class FoodController extends Controller
         $food->update();
 
         if(session('tasks_url')){
-            echo "";
             return redirect(session('tasks_url'))->withSuccessMessage('Successfully Updated Food Data');
         }
         return redirect('/food')->withSuccessMessage('Successfully Updated Food Data');

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -101,5 +102,15 @@ class UserController extends Controller
 
         return redirect('admindashboard')->withSuccessMessage('Successfully Updated Your Profile');
         
+    }
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+
+        $users = User::where('name','like','%'.$search.'%')->paginate(5);
+        $roles = Role::all();
+
+        return view('user.index',compact('users','roles'));
+
     }
 }

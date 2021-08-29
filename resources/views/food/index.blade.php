@@ -3,10 +3,20 @@
 
 
 <div class="jumbotron text-center bg-dark" style="border-radius: 0px;">
-    <h1 class="text-white"><i class='bx bx-coffee-togo'></i></h1>
+    <a class="text-white h1" href="{{url('/food')}}"><i class='bx bx-coffee-togo'></i></a>
     <h3 class="text-white">Food</h3>
-    <div class="float-right mr-3 mt-3">
-        <a href="" class="btn btn-sm bg-white text-dark btnAdd" data-toggle="modal" 
+    <div class="d-flex float-right mr-3 mt-3">
+        <form action="/searchfood" method="GET">                    
+            <div class="input-group class="float-left">
+                <input type="text" class="form-control bg-dark text-white border border-white border-top-0 border-left-0 border-right-0" name="search"
+                placeholder="Enter name to search" value="{{ old('search') }}">
+                <span class="input-group-prepend">
+                    <button type="submit" class="btn text-dark bg-white rounded-circle"><i class='bx bx-search-alt'></i></button>
+                </span>            
+            </div>                    
+        </form>
+        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+        <a href="" class="btn btn-md bg-white text-dark btnAdd" data-toggle="modal" 
         data-target="#AddModal"><i class='bx bx-plus-circle'></i> Add New</a>
         
     </div>
