@@ -71,7 +71,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_name' => 'required',
+            'category_name' => 'required|unique:categories,name',
             'status' => 'required',
             'category_image' => 'required'
         ]);

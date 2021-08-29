@@ -76,7 +76,7 @@ class FoodController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'food_name' => 'required',
+            'food_name' => 'required|unique:food,name',
             'food_image' => 'required',
             'category_id' => 'required',          
             'price' => 'required',
@@ -85,7 +85,7 @@ class FoodController extends Controller
             'have' => 'required'
             
         ]);
-
+        
         $food = new Food();
         $food->name = $request->food_name;
         $food->category_id = $request->category_id;
