@@ -125,23 +125,23 @@ header{
 header .logo{
     font-size: 2.5rem;
     font-weight: bolder;
-    color: #fff;
+    color: #000;
  }
 
  header .logo i{
     font-size: 3rem;
     padding-right: .5rem;
-    color: #fff;
+    color: #000;
  }
 
 
  header .navbar a{
      font-size: 2rem;
-     margin-left: 2rem;
-     color: #fff;
+     margin-left: 5rem;
+     color: #000;
  }
  header .navbar a:hover{
-    color: #000;
+    color: #fff;
 }
 
 #menu-bar{
@@ -466,7 +466,9 @@ header .logo{
         display: block;
         border: .2rem solid rgba(0,0,0,.1);
         border-left: .5rem solid var(--yellow);
-        background: #000;
+        background: #fff;
+        width: 100%;
+        text-align: center;
     }
 }
 

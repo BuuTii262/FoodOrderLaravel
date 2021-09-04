@@ -11,6 +11,9 @@
     
     <!-- Boxicon CDN link -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
     <!-- side bar start -->
@@ -21,7 +24,8 @@
                     <i class='bx bx-spa'></i>
                     <div class="logo_name">Yu Lian</div>
                 </div>
-                <i class='bx bx-menu' id="btn"></i>
+                {{-- <i class='bx bx-menu' id="btn"></i> --}}
+                <i class="fas fa-bars" id="btn"></i>
             </div>
             <ul class="nav_list">
                 <!-- <li>
@@ -33,14 +37,14 @@
                 </li> -->
                 <li>
                     <a href="{{ url('admindashboard') }}" id="navList">
-                        <i class='bx bx-home'></i>
+                        <i class="fas fa-home"></i>
                         <span class="links_name">Dashboard</span>
                     </a>
                     <span class="tooltip">Dashboard</span>                   
                 </li>
                 <li>
                     <a href="{{url('user')}}" id="navList">
-                        <i class='bx bx-user-circle'></i>
+                        <i class="fas fa-users"></i>
                         <span class="links_name">User</span>
                     </a>
                     <span class="tooltip">User</span>                   
@@ -48,7 +52,7 @@
                 <hr class="bg-white">
                 <li>
                     <a href="{{url('category')}}" id="navList">
-                        <i class='bx bx-food-menu'></i>
+                        <i class="fas fa-list-alt"></i>
                         
                         <span class="links_name">Category</span>
                     </a>
@@ -56,22 +60,22 @@
                 </li>
                 <li>
                     <a href="{{url('food')}}" id="navList">
-                        <i class='bx bx-coffee-togo'></i>
+                        <i class="fas fa-pizza-slice"></i>
                         <span class="links_name">Food</span>
                     </a>
                     <span class="tooltip">Food</span>                   
                 </li>
                 <hr class="bg-white">
                 <li>
-                    <a href="#" id="navList">
-                        <i class='bx bx-cart-alt'></i>
+                    <a href="{{url('order')}}" id="navList">
+                        <i class="fas fa-shopping-cart"></i>
                         <span class="links_name">Order</span>
                     </a>
                     <span class="tooltip">Order</span>                   
                 </li>
                 <li>
                     <a href="{{url('normaluser')}}" id="navList">
-                    <i class='bx bx-palette'></i>
+                        <i class="fas fa-palette"></i>
                         <span class="links_name">UserDashboard</span>
                     </a>
                     <span class="tooltip">UserDashboard</span>                   
