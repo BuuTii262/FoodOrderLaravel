@@ -36,7 +36,7 @@
                     <img src="{{asset('uploads/foodImage/'.$food->food_image)}}" alt="">
                     <h3>{{$food->name}}</h3>
                     <div class="stars">
-                        <i class="fas fa-info-circle">detials</i>
+                        <a href="" data-toggle="modal" data-target="#DetailModal{{$food->uuid}}"><i class="fas fa-info-circle">detials</i></a>
                     </div>
                     @if ($food->have == "Yes")
                     <form action="{{ route('add_to_cart') }}" method="post">
@@ -48,7 +48,7 @@
                     @endif
                     
                 </div>
-        
+                @include('food.detail')
                 @endforeach
         
             </div>

@@ -56,24 +56,25 @@
     
         <div class="box-container">
     
-            @foreach($popular_foods as $popular_food)
+            @foreach($popular_foods as $food)
     
             <div class="box">
-                <span class="price">{{$popular_food->price}}MKK</span>
-                <img src="{{asset('uploads/foodImage/'.$popular_food->food_image)}}" alt="">
-                <h3>{{$popular_food->name}}</h3>
+                <span class="price">{{$food->price}}MKK</span>
+                <img src="{{asset('uploads/foodImage/'.$food->food_image)}}" alt="">
+                <h3>{{$food->name}}</h3>
                 <div class="stars">
-                    <i class="fas fa-info-circle">detials</i>
+                    <a href="" data-toggle="modal" data-target="#DetailModal{{$food->uuid}}"><i class="fas fa-info-circle">detials</i></a>
                 </div>
-                @if ($popular_food->have == "Yes")
+                @if ($food->have == "Yes")
                 <form action="{{ route('add_to_cart') }}" method="post">
                     @csrf 
-                    <input type="hidden" name="food_id" value="{{$popular_food->uuid}}">
+                    <input type="hidden" name="food_id" value="{{$food->uuid}}">
                     <input type="hidden" name="qty" value="1">
                     <button class="btn bg-white"><i class="fas fa-shopping-bag"></i> add to cart</button>
                 </form>
                 @endif
             </div>
+            @include('food.detail')
     
             @endforeach
     

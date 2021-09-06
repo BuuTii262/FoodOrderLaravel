@@ -151,7 +151,7 @@ hr {
                 <div class="row">
                     <div class="col-sm-6">
                         <div>
-                            <span class="text-sm text-grey-m2 align-middle">To:</span>
+                            <span class="text-sm text-grey-m2 align-middle"></span>
                             <span class="text-600 text-110 text-blue align-middle">{{$user->name}}</span>
                         </div>
                         <div class="text-grey-m2">

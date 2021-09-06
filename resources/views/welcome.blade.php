@@ -12,8 +12,17 @@
     <!-- font-awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link  href="/css/welcome.css" rel="stylesheet"> 
+    <style>
+    .imageDetail{
+        width: 100%;
+        /* height: 400px; */
+        border: 1px solid black;
+        border-radius: .5rem;
+    }
+    </style>
 </head>
 <body>
+
     <!-- header section start -->
     <header>
         <a href="#home" class="logo"><i class='bx bx-spa'></i>Yu Lian</a>
@@ -89,29 +98,32 @@
 
         <div class="box-container">
 
-            @foreach($popular_foods as $popular_food)
+            @foreach($popular_foods as $food)
 
             <div class="box">
-                <span class="price">{{$popular_food->price}}MKK</span>
-                <img src="{{asset('uploads/foodImage/'.$popular_food->food_image)}}" alt="">
-                <h3>{{$popular_food->name}}</h3>
+                <span class="price">{{$food->price}}MKK</span>
+                <img src="{{asset('uploads/foodImage/'.$food->food_image)}}" alt="">
+                <h3>{{$food->name}}</h3>
                 <div class="stars">
-                    <i class="fas fa-info-circle">detials</i>
+                    <a href="" data-toggle="modal" data-target="#DetailModal{{$food->uuid}}"><i class="fas fa-info-circle">detials</i></a>
                 </div>
                 <form action="{{ route('add_to_cart') }}" method="post">
                     @csrf 
-                    <input type="hidden" name="food_id" value="{{$popular_food->uuid}}">
+                    <input type="hidden" name="food_id" value="{{$food->uuid}}">
                     <input type="hidden" name="qty" value="1">
                     <button class="btn bg-white">add to cart</button>
                 </form>
             </div>
+            @include('food.detail')
 
             @endforeach
 
         </div>
 
-    </section>
+    </section>    
+    
     <!-- Popular section end -->
+    
 
     <!-- Step section end -->
 
@@ -156,7 +168,7 @@
                         <p>{{$food->description}}</p>
                         <form action="{{ route('add_to_cart') }}" method="post">
                             @csrf 
-                            <input type="hidden" name="food_id" value="{{$popular_food->uuid}}">
+                            <input type="hidden" name="food_id" value="{{$food->uuid}}">
                             <input type="hidden" name="qty" value="1">
                             <button class="btn bg-white">add to cart</button>
                         </form>
@@ -192,12 +204,15 @@
     <a href="#home" class="fas fa-angle-up" id="scroll-top"></a>
 
     <!-- loader -->
-    <div class="loader-container" style="background: #feda31">
+    {{-- <div class="loader-container" style="background: #feda31">
         <img src="{{asset('uploads/images/loader.gif')}}" alt="">
-    </div>
+    </div> --}}
 
 
 
     <script src="/js/welcome.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
