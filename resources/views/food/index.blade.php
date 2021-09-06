@@ -3,7 +3,7 @@
 
 
 <div class="jumbotron text-center bg-dark" style="border-radius: 0px;">
-    <a class="text-white h1" href="{{url('/food')}}"><i class='bx bx-coffee-togo'></i></a>
+    <a class="text-white h1" href="{{url('/food')}}"><i class="fas fa-pizza-slice"></i></a>
     <h3 class="text-white">Food</h3>
     <div class="d-flex float-right mr-3 mt-3">
         <form action="/searchfood" method="GET">                    
@@ -42,7 +42,7 @@
                 <th>IMAGE</th>
                 <th>CATEGORY</th>
                 <th>PRICE</th>
-                <th>AVAILABLE</th>
+                <th>HAVE</th>
                 <th>STATUS</th>
                 @foreach(Auth::user()->roles as $role)
                     @if($role->name == 'Admin')

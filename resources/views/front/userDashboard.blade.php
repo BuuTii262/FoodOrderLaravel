@@ -65,12 +65,14 @@
                 <div class="stars">
                     <i class="fas fa-info-circle">detials</i>
                 </div>
+                @if ($popular_food->have == "Yes")
                 <form action="{{ route('add_to_cart') }}" method="post">
                     @csrf 
                     <input type="hidden" name="food_id" value="{{$popular_food->uuid}}">
                     <input type="hidden" name="qty" value="1">
-                    <button class="btn bg-white">add to cart</button>
+                    <button class="btn bg-white"><i class="fas fa-shopping-bag"></i> add to cart</button>
                 </form>
+                @endif
             </div>
     
             @endforeach
@@ -117,12 +119,14 @@
                     <div class="content">
                         <h3>{{$food->name}}</h3>
                         <p>{{$food->description}}</p>
+                        @if ($food->have == "Yes")
                         <form action="{{ route('add_to_cart') }}" method="post">
                             @csrf 
                             <input type="hidden" name="food_id" value="{{$food->uuid}}">
                             <input type="hidden" name="qty" value="1">
-                            <button class="btn bg-white">add to cart</button>
+                            <button class="btn bg-white"><i class="fas fa-shopping-bag"></i> add to cart</button>
                         </form>
+                        @endif
                     </div>
                 </div>    
             @endforeach

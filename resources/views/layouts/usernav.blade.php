@@ -17,7 +17,7 @@
 <body>
     <!-- header section start -->
     <header>
-        <a href="#home" class="logo"><i class='bx bx-spa'></i>Yu Lian</a>
+        <a href="{{url('normaluser')}}" class="logo"><i class='bx bx-spa'></i>Yu Lian</a>
 
         <div id="menu-bar" class="fas fa-bars"></div>
 

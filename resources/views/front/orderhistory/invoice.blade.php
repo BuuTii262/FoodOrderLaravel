@@ -139,7 +139,7 @@ hr {
                     <div class="col-12">
                         <div class="text-center text-150" style="margin-top: 30px;">
                             {{-- <i class="fa fa-book fa-2x text-success-m2 mr-1"></i> --}}
-                            <i class="fas fa-spa fa-2x text-warning-m2 mr-1"></i>
+                            <i class="fas fa-spa fa-2x mr-1" style="color: gold"></i>
                             <span class="text-default-d3">Yu Lian Restourant</span>
                         </div>
                     </div>

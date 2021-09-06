@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Food;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminDashboardController extends Controller
 {
@@ -25,9 +27,15 @@ class AdminDashboardController extends Controller
         $alluser = User::all();
         $allfood = Food::all();
         $allcategory = Category::all();
+        $allorder = Order::all();
+
+        $orders = DB::table('orders')
+        ->join('users', 'orders.user_id','=' , 'users.id')
+        ->select('orders.*', 'users.name')
+        ->latest()->paginate(5);
 
         $users = User::latest()->paginate(5);
-        return view('back.adminDashboard',compact('users','alluser','allfood','allcategory'));
+        return view('back.adminDashboard',compact('users','alluser','allfood','allcategory','allorder','orders'));
     }
 
     /**

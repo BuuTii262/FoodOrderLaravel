@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="jumbotron text-center bg-dark" style="border-radius: 0px;">
-    <a class="text-white h1" href="{{url('admindashboard')}}"><i class='bx bx-home'></i></h1></a>
+    <a class="text-white h1" href="{{url('admindashboard')}}"><i class="fas fa-home"></i></h1></a>
     <h3 class="text-white">Dashboard</h3>
 </div>
   
@@ -13,7 +13,7 @@
 
         <div class="col-sm-3">
             <div class="card text-white mb-3 text-center">
-            <h2 class="card-header bg-dark"><i class='bx bx-user-circle'></i></h2>
+            <h2 class="card-header bg-dark"><i class="fas fa-users"></i></h2>
             <div class="card-body text-dark">
                 <p class="card-title h4 mb-3">{{count($alluser)}} Users</p>
                 
@@ -25,7 +25,7 @@
 
         <div class="col-sm-3">
             <div class="card text-white mb-3 text-center">
-            <h2 class="card-header bg-dark"><i class='bx bx-category-alt'></i></h2>
+            <h2 class="card-header bg-dark"><i class="fas fa-list-alt"></i></h2>
             <div class="card-body text-dark">
                 <p class="card-title h4 mb-3">{{count($allcategory)}} Categories</p> 
                 <a href="{{url('category')}}" class="btn btn-outline-dark btn-md">View All</a>           
@@ -35,7 +35,7 @@
 
         <div class="col-sm-3">
             <div class="card text-white mb-3 text-center">
-            <h2 class="card-header bg-dark"><i class='bx bx-coffee-togo'></i></h2>
+            <h2 class="card-header bg-dark"><i class="fas fa-pizza-slice"></i></h2>
             <div class="card-body text-dark">
                 <p class="card-title h4 mb-3">{{count($allfood)}} Foods</p>
                 <a href="{{url('food')}}" class="btn btn-outline-dark btn-md">View All</a>           
@@ -45,10 +45,10 @@
 
         <div class="col-sm-3">
             <div class="card text-white mb-3 text-center">
-            <h2 class="card-header bg-dark"><i class='bx bx-cart-alt'></i></h2>
+            <h2 class="card-header bg-dark"><i class="fas fa-shopping-cart"></i></h2>
             <div class="card-body text-dark">
-                <p class="card-title h4 mb-3">73 Orders</p>  
-                <a href="#" class="btn btn-outline-dark btn-md">View All</a>           
+                <p class="card-title h4 mb-3">{{count($allorder)}} Orders</p>  
+                <a href="{{url('order')}}" class="btn btn-outline-dark btn-md">View All</a>           
                          
             </div>
             </div>
@@ -75,45 +75,20 @@
                                     <th>ADDRESS</th>
                                     <th>PHONE</th>
                                     <th>ORDER QTY</th>
-                                    <th>Action</th>
+                                    <th>STATUS</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($orders as $order)
                                 <tr>                                   
-                                    <td>Thiha Aung</td>
-                                    <td>Block 10</td>
-                                    <td>09254584519</td>
-                                    <td>4</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Detals</button></td>
+                                    <td>{{ $order->name }}</td>
+                                    <td>{{ $order->address }}</td>
+                                    <td>{{ $order->phone }}</td>
+                                    <td>{{ $order->order_total }}</td>
+                                    <td>{{ $order->order_status }}</td>
+                                    {{-- <td><button type="button" class="btn btn-primary btn-sm">Detals</button></td> --}}
                                 </tr>
-                                <tr>                                   
-                                    <td>Seng Mo</td>
-                                    <td>Block 6</td>
-                                    <td>09254584519</td>
-                                    <td>2</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Detals</button></td>
-                                </tr>
-                                <tr>                                   
-                                    <td>Kyaw Gyi</td>
-                                    <td>Block 10</td>
-                                    <td>09254584519</td>
-                                    <td>6</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Detals</button></td>
-                                </tr>
-                                <tr>                                   
-                                    <td>Mg Kaung</td>
-                                    <td>Block 1</td>
-                                    <td>09254584519</td>
-                                    <td>1</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Detals</button></td>
-                                </tr>
-                                <tr>                                   
-                                    <td>Ma May</td>
-                                    <td>Block 10</td>
-                                    <td>09254584519</td>
-                                    <td>4</td>
-                                    <td><button type="button" class="btn btn-primary btn-sm">Detals</button></td>
-                                </tr>
+                                @endforeach
                                 
                             </tbody>
 

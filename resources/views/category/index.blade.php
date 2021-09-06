@@ -3,7 +3,7 @@
 
 
 <div class="jumbotron text-center bg-dark" style="border-radius: 0px;">
-    <a class="text-white h1" href="{{url('/category')}}"><i class='bx bx-food-menu'></i></a>
+    <a class="text-white h1" href="{{url('/category')}}"><i class="fas fa-list-alt"></i></a>
     <h3 class="text-white">Category</h3>
     <div class="d-flex float-right mr-3 mt-3">
         <form action="/searchcategory" method="GET">                    

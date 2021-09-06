@@ -52,6 +52,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('food',FoodController::class);
     Route::get('/searchfood',[FoodController::class,'search']);
     Route::get('/foodlists',[UserFoodPageController::class,'index']);
+    Route::get('/searchfood/bycategory',[UserFoodPageController::class,'searchFoodByCategory'])->name('search_by_category');
     
     Route::resource('/admindashboard',AdminDashboardController::class);
 
@@ -69,6 +70,8 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/view/order/detail/{order_id}',[App\Http\Controllers\OrderController::class, 'viewOrder'])->name('view_order');
     Route::get('/view/invoice/{order_id}',[App\Http\Controllers\OrderController::class, 'viewInvoice'])->name('view_order_invoice');
     Route::delete('/order/delete/{order_id}',[App\Http\Controllers\OrderController::class, 'deleteOrder'])->name('delete_order');
+    Route::post('/order/update/{order_id}',[App\Http\Controllers\OrderController::class, 'update'])->name('update_order');
+
 
     Route::get('/orderhistory/{user_id}',[App\Http\Controllers\OrderHistoryController::class, 'viewHistory'])->name('view_order_history');
     Route::get('/userinvoice/{order_id}',[App\Http\Controllers\OrderHistoryController::class, 'viewInvoice'])->name('user_order_invoice');

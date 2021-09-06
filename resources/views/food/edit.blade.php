@@ -78,16 +78,16 @@
             <br>
 
             <div class="form group">
-                <label>Available</label>
+                <label>Have</label>
                 <div class="form-check">
                     <input type="radio" class="form-check-input @error('have') is-invalid @enderror" 
-                    name="have" id="availableYes{{$food->uuid}}" value="Yes" {{ $food->status == 'Yes' ? 'checked' : '' }}> 
+                    name="have" id="availableYes{{$food->uuid}}" value="Yes" {{ $food->have == 'Yes' ? 'checked' : '' }}> 
                     <label class="form-check-label" for="availableYes{{$food->uuid}}">
                     Yes
                     </label>
                     &nbsp; &nbsp; &nbsp;
                     <input type="radio" class="form-check-input @error('have') is-invalid @enderror" 
-                    name="have" id="availableNO{{$food->uuid}}" value="No" {{ $food->status == 'No' ? 'checked' : '' }}>
+                    name="have" id="availableNO{{$food->uuid}}" value="No" {{ $food->have == 'No' ? 'checked' : '' }}>
                     <label class="form-check-label" for="availableNO{{$food->uuid}}">
                     No
                     </label>
@@ -102,13 +102,13 @@
                 <label>Status</label>
                 <div class="form-check">
                     <input type="radio" class="form-check-input @error('status') is-invalid @enderror" 
-                    name="status" id="statusYes{{$food->uuid}}" value="Yes" {{ $food->have == 'Yes' ? 'checked' : '' }}> 
+                    name="status" id="statusYes{{$food->uuid}}" value="Yes" {{ $food->status == 'Yes' ? 'checked' : '' }}> 
                     <label class="form-check-label" for="statusYes{{$food->uuid}}">
                     Yes
                     </label>
                     &nbsp; &nbsp; &nbsp;
                     <input type="radio" class="form-check-input @error('status') is-invalid @enderror" 
-                    name="status" id="statusNo{{$food->uuid}}" value="No" {{ $food->have == 'No' ? 'checked' : '' }}>
+                    name="status" id="statusNo{{$food->uuid}}" value="No" {{ $food->status == 'No' ? 'checked' : '' }}>
                     <label class="form-check-label" for="statusNo{{$food->uuid}}">
                     No
                     </label>

@@ -136,8 +136,9 @@ hr {
                 <div class="row">
                     <div class="col-12">
                         <div class="text-center text-150">
-                            {{-- <i class="fa fa-book fa-2x text-success-m2 mr-1"></i> --}}
-                            <i class="fas fa-spa fa-2x text-warning-m2 mr-1"></i>
+                            
+                            <i class="fas fa-spa fa-2x mr-1" style="color: gold"></i>
+                            
                             <span class="text-default-d3">Yu Lian Restourant</span>
                         </div>
                     </div>
@@ -194,7 +195,7 @@ hr {
                                     <th>Food Name</th>
                                     <th>Qty</th>
                                     <th>Unit Price</th>
-                                    <th width="140">Amount</th>
+                                    <th width="140">Total Price</th>
                                 </tr>
                             </thead>
                             @php($i=1)

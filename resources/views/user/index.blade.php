@@ -3,7 +3,7 @@
 
 
 <div class="jumbotron text-center bg-dark" style="border-radius: 0px;">
-    <a class="text-white h1" href="{{url('/user')}}"><i class='bx bx-user-circle'></i></a>
+    <a class="text-white h1" href="{{url('/user')}}"><i class="fas fa-users"></i></a>
     <h3 class="text-white">User</h3>
     <div class="d-flex float-right mr-3 mt-3">
         <form action="/searchuser" method="GET">                    

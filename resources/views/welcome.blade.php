@@ -37,7 +37,7 @@
         <div class="content">
             <h3>Welcome From Our Restourant</h3>
             <p>Enjoy fresh and delicious Foods, Enjoy fresh and delicious Foods, Enjoy fresh and delicious Foods, Enjoy fresh and delicious Foods,Enjoy fresh and delicious Foods,Enjoy fresh and delicious Foods.</p>
-            <a href="#" class="btn">Start Order </a>
+            <a href="{{url('login')}}" class="btn">Start Now</a>
         </div>
 
         <div class="image">
@@ -65,7 +65,7 @@
 
     <!-- special section start -->
     <section class="speciality" id="special">
-        <h1 class="heading"> Our <span>speciality</span> Menu</h1>
+        <h1 class="heading"> Our <span>special</span> Menu</h1>
 
         <div class="boxcontainer">
             @foreach ($special_categories as $special_category)
@@ -98,7 +98,12 @@
                 <div class="stars">
                     <i class="fas fa-info-circle">detials</i>
                 </div>
-                <a href="#" class="btn">Order Now</a>
+                <form action="{{ route('add_to_cart') }}" method="post">
+                    @csrf 
+                    <input type="hidden" name="food_id" value="{{$popular_food->uuid}}">
+                    <input type="hidden" name="qty" value="1">
+                    <button class="btn bg-white">add to cart</button>
+                </form>
             </div>
 
             @endforeach
@@ -149,7 +154,12 @@
                     <div class="content">
                         <h3>{{$food->name}}</h3>
                         <p>{{$food->description}}</p>
-                        <a href="#" class="btn">Order Now</a>
+                        <form action="{{ route('add_to_cart') }}" method="post">
+                            @csrf 
+                            <input type="hidden" name="food_id" value="{{$popular_food->uuid}}">
+                            <input type="hidden" name="qty" value="1">
+                            <button class="btn bg-white">add to cart</button>
+                        </form>
                     </div>
                 </div>    
             @endforeach

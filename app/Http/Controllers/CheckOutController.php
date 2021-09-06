@@ -53,7 +53,7 @@ class CheckOutController extends Controller
         }
 
         Cart::destroy();
-        return redirect('/foodlists');
+        return redirect('/foodlists')->withSuccessMessage("Order Successful");
 
     }
 }

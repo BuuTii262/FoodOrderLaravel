@@ -77,7 +77,7 @@
             <br>
 
             <div class="form group">
-                <label>Available</label>
+                <label>Have</label>
                 <div class="form-check">
                     <input type="radio" class="form-check-input @error('have') is-invalid @enderror" 
                     name="have" value="Yes" checked> 

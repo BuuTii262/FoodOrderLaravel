@@ -16,7 +16,7 @@ class OrderHistoryController extends Controller
                     ->join('users', 'orders.user_id','=' , 'users.id')
                     ->select('orders.*', 'users.name')
                     ->where('orders.user_id', '=' , $user_id)
-                    ->get();
+                    ->latest()->get();
                     // dd($orders);
         return view('front.orderhistory.index', compact('orders'));
     }

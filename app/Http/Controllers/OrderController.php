@@ -26,8 +26,8 @@ class OrderController extends Controller
         }
         $orders = DB::table('orders')
                     ->join('users', 'orders.user_id','=' , 'users.id')
-                    ->select('orders.*', 'users.name')
-                    ->get();
+                    ->select('orders.*', 'users.name')->latest()
+                    ->paginate(6);
                     // dd($orders);
         Session::put('tasks_url', request()->fullUrl());
         return view('order.index', compact('orders'));
@@ -55,5 +55,13 @@ class OrderController extends Controller
         $order_details = OrderDetail::where('order_id', $order->order_id)->get();
 
         return view('order.orderInvoice', compact('order','user','order_details'));   
+    }
+
+    public function update(Request $request, $order_id)
+    {
+        $order = Order::find($order_id);
+        $order->order_status = $request->status;
+        $order->update();
+        return back()->withSuccessMessage('Order Status Updated Successfully');
     }
 }
