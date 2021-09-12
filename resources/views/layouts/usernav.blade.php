@@ -36,7 +36,7 @@
             <a href="{{url('/cart/show')}}"><i class="fas fa-shopping-bag"></i></a>
             <a href="{{ route('view_order_history',['user_id'=>Auth::user()->id]) }}"><i class="fas fa-history"></i></a>
             
-            <a href="{{ url('/user/'.Auth::user()->id.'/editprofile') }}"><i class="fas fa-user-alt"></i></a>
+            {{-- <a href="{{ url('/user/'.Auth::user()->id.'/editprofile') }}"><i class="fas fa-user-alt"></i></a> --}}
             <a href="{{ route('logout') }}"
                 onclick="
                 event.preventDefault();

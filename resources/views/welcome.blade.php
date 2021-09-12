@@ -66,7 +66,7 @@
                 @endif
             </div>
             {{-- <img src="{{ asset('uploads/images/food.gif') }}" alt=""> --}}
-            <img src="{{ asset('uploads/images/home-img.png') }}" alt="">
+            <img src="{{ asset('uploads/images/food.gif') }}" alt="">
         </div>
         
     </section>
@@ -204,9 +204,9 @@
     <a href="#home" class="fas fa-angle-up" id="scroll-top"></a>
 
     <!-- loader -->
-    {{-- <div class="loader-container" style="background: #feda31">
+    <div class="loader-container" style="background: #feda31">
         <img src="{{asset('uploads/images/loader.gif')}}" alt="">
-    </div> --}}
+    </div>
 
 
 
