@@ -20,17 +20,14 @@
               class="form-control @error('category_name') is-invalid @enderror" id="name">
               @error('category_name')
                 <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+              @enderror
           </div>
           <br>
 
           <div class="form-elememt">
                     <label for="file">Category Image</label><br>
                         <input type="file" id="file-1" name="category_image" 
-                        class="form-control @error('category_image') is-invalid @enderror">
-                        @error('category_image')
-                        <div class="invalid-feedback" style="color: red;">Upload Image !</div>
-                        @enderror 
+                        class="form-control">
                         
                         <label for="file-1" id="file-1-preview">
                             <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}">

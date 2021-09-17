@@ -31,8 +31,13 @@
             <label>Food Image</label><br>
                         
                         <label>
-                            
+                            @if ($food->food_image == 'defaultfood.jpg')
+                            <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}" class="imagePreview{{$food->uuid}}">
+                                
+                            @else
                             <img src="{{ asset('uploads/foodImage/'.$food->food_image) }}" class="imagePreview{{$food->uuid}}">
+                                
+                            @endif
                            
                             
                         </label>                       

@@ -51,22 +51,22 @@
                                 @foreach(Auth::user()->roles as $role)
                                     @if($role->name == 'Admin')
                                     <td>
-                                        <form action="{{ url('user/'.$user->id.'/delete') }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
+                                        
                                             <!-- <a href="{{ url('/user/'.$user->id.'/edit') }}" class="btn btn-dark btn-sm" >managerole</a> -->                            
                                             <button type="button" class="btn btn-dark btn-sm" 
                                             data-toggle="modal" data-target="#EditRoleModal{{$user->id}}">
-                                            Manage Role
+                                            <i class="fas fa-edit"></i> Manage Role
                                             </button>
 
                                             <button type="submit" class="btn btn-danger btn-sm" 
-                                                onclick="return confirm('Are you want to delete it?')">
-                                            <i class='bx bx-trash'></i> Delete</button>
-                                        </form>    
+                                            data-toggle="modal" data-target="#DeleteUserModal{{$user->id}}">
+                                            <i class="far fa-trash-alt"></i> Delete</button>
+                                          
                                             
                                     </td>
                                     @include('user.managerole')
+                                    @include('user.delete')
+
                                     @endif
                                 @endforeach
                             </tr>

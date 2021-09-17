@@ -25,6 +25,31 @@
 
 @include('food.create')
 
+@error('food_name')
+    <div class="alert alert-danger alert-dismissibel show fade text-center">
+        <strong>{{ $message }}</strong>
+        <button class="close" data-dismiss="alert">&times;</button>
+    </div> 
+@enderror
+@error('category_id')
+    <div class="alert alert-danger alert-dismissibel show fade text-center">
+        <strong>{{ $message }}</strong>
+        <button class="close" data-dismiss="alert">&times;</button>
+    </div> 
+@enderror
+@error('price')
+    <div class="alert alert-danger alert-dismissibel show fade text-center">
+        <strong>{{ $message }}</strong>
+        <button class="close" data-dismiss="alert">&times;</button>
+    </div> 
+@enderror
+@error('description')
+    <div class="alert alert-danger alert-dismissibel show fade text-center">
+        <strong>{{ $message }}</strong>
+        <button class="close" data-dismiss="alert">&times;</button>
+    </div> 
+@enderror
+
 <div class="container">
 @if(Session('successAlert'))
                 <div class="alert alert-success alert-dismissibel show fade" role="alert">
@@ -59,16 +84,16 @@
             <td>{{ $food->name }}</td>
 
             <td>
-                @if($food->food_image != "")
-                                
-                    <img src="{{ asset('uploads/foodImage/'.$food->food_image) }}"
-                    class="border border-dark image_list">
-
-                @else                                
+                @if($food->food_image == 'defaultfood.jpg')
 
                 <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}"  
                 class="border border-dark image_list">
-                              
+                                                    
+                @else 
+
+                <img src="{{ asset('uploads/foodImage/'.$food->food_image) }}"
+                class="border border-dark image_list">   
+
                 @endif
                                 
             </td>
@@ -92,23 +117,18 @@
             @foreach(Auth::user()->roles as $role)
                 @if($role->name == 'Admin')
             <td>
-                <form action="{{ url('food/'.$food->uuid) }}" method="POST">
-                    @csrf
-                    @method('DELETE') 
-                                 
                     <button type="button" class="btn btn-warning btn-sm" 
                     data-toggle="modal" data-target="#EditModal{{$food->uuid}}">
                     <i class='bx bx-edit-alt'></i> Edit
                     </button>
                                       
                     <button type="submit" class="btn btn-danger btn-sm" 
-                    onclick="return confirm('Are you want to delete it?')">
+                    data-toggle="modal" data-target="#DeleteModal{{$food->uuid}}">
                     <i class='bx bx-trash'></i> Delete</button>
                         
-
-                </form>
             </td>
             @include('food.edit')
+            @include('food.delete')
                 @endif
             @endforeach
             <!-- user with admin role can see and edit -->

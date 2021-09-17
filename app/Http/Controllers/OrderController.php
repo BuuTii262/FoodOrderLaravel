@@ -27,7 +27,7 @@ class OrderController extends Controller
         $orders = DB::table('orders')
                     ->join('users', 'orders.user_id','=' , 'users.id')
                     ->select('orders.*', 'users.name')->latest()
-                    ->paginate(6);
+                    ->paginate(10);
                     // dd($orders);
         Session::put('tasks_url', request()->fullUrl());
         return view('order.index', compact('orders'));

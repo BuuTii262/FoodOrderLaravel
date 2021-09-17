@@ -27,10 +27,7 @@
             <div class="form-elememt">
                     <label for="file">Food Image</label><br>
                         <input type="file" id="file-1" name="food_image" 
-                        class="form-control @error('food_image') is-invalid @enderror">
-                        @error('food_image')
-                        <div class="invalid-feedback" style="color: red;">Upload Image !</div>
-                        @enderror 
+                        class="form-control">
                             
                     <label for="file-1" id="file-1-preview">
                         <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}">

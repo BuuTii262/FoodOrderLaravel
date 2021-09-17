@@ -61,11 +61,7 @@
 
                             <td>{{ $order->created_at }}</td>
                             
-                                    <td>
-                                        <form action="{{ route('delete_order',['order_id'=>$order->order_id]) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE') 
-                                            
+                                    <td>                                           
                                             <a href="{{ route('view_order',['order_id'=>$order->order_id]) }}" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-info-circle"></i>
                                             </a>
@@ -76,12 +72,12 @@
                                             @foreach(Auth::user()->roles as $role)
                                                 @if($role->name == 'Admin')
                                                 <button type="submit" class="btn btn-danger btn-sm" 
-                                                onclick="return confirm('Are you want to delete it?')">
+                                                data-toggle="modal" data-target="#DeleteOrderModal{{$order->order_id}}">
                                                 <i class="fas fa-trash-alt"></i></button>
                                                 @endif
                                             @endforeach
-                                        </form>
                                     </td>
+                                    @include('order.delete')
                         </tr>
                         @endforeach
             

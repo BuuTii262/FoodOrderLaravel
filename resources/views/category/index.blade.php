@@ -23,7 +23,13 @@
 </div>
 
 @include('category.create')
-              
+
+@error('category_name')
+    <div class="alert alert-danger alert-dismissibel show fade text-center">
+        <strong>{{ $message }}</strong>
+        <button class="close" data-dismiss="alert">&times;</button>
+    </div> 
+@enderror          
   <div class="table-responsive"> 
       <table class="table table-hover">
         <thead class="bg-dark text-white">
@@ -46,14 +52,13 @@
                             
                             <td>{{ $category->name }}</td>
                             <td>
-                                @if($category->category_image != "")
-
-                                    <img src="{{ asset('uploads/categoryImage/'.$category->category_image) }}" 
+                                @if($category->category_image == 'defaultfood.jpg')
+                                <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}"  
                                     class="border border-dark image_list">
-
+                                    
                                 @else                                
-
-                                    <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}"  
+  
+                                    <img src="{{ asset('uploads/categoryImage/'.$category->category_image) }}" 
                                     class="border border-dark image_list">
                               
                                 @endif
@@ -64,21 +69,21 @@
                             @foreach(Auth::user()->roles as $role)
                                 @if($role->name == 'Admin')
                                     <td>
-                                        <form action="{{ url('category/'.$category->uuid) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE') 
+                                        
                                             
-                                                <button type="button" class="btn btn-warning btn-sm" 
-                                                data-toggle="modal" data-target="#EditModal{{$category->uuid}}">
-                                                <i class='bx bx-edit-alt'></i> Edit
-                                                </button>
+                                            <button type="button" class="btn btn-warning btn-sm" 
+                                            data-toggle="modal" data-target="#EditModal{{$category->uuid}}">
+                                            <i class='bx bx-edit-alt'></i> Edit
+                                            </button>
                                             
                                             <button type="submit" class="btn btn-danger btn-sm" 
-                                            onclick="return confirm('Are you want to delete it?')">
+                                            data-toggle="modal" data-target="#DeleteModal{{$category->uuid}}">
                                             <i class='bx bx-trash'></i> Delete</button>
-                                        </form>
+                                        
                                     </td>
                                     @include('category.edit')
+                                    @include('category.delete')
+
 
                                 @endif
                             @endforeach

@@ -30,7 +30,7 @@ class CategoryController extends Controller
         {
             Alert::success('Success', session('success_message'));
         }
-        $categories = Category::latest()->paginate(5);
+        $categories = Category::latest()->paginate(10);
 
         Session::put('tasks_url', request()->fullUrl());
         
@@ -71,11 +71,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_name' => 'required|unique:categories,name',
-            'status' => 'required',
-            'category_image' => 'required'
+            'category_name' => 'required|unique:categories,name|max:20,name',
+            'status' => 'required'
         ]);
 
+        $defaultImage = "defaultfood.jpg";
 
         $category = new Category();
         $category->name = $request->category_name;
@@ -87,6 +87,10 @@ class CategoryController extends Controller
             $file_name = 'category'.time().'.'.$extension;
             $file->move('uploads/categoryImage/',$file_name);
             $category->category_image = $file_name;
+        }
+        else
+        {
+            $category->category_image = $defaultImage;
         }
         $category->status = $request->status;
         $category->save();
@@ -126,7 +130,7 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'category_name' => 'required',
+            'category_name' => 'required|unique:categories,name|max:20,name',
             'status' => 'required',
         ]);
 

@@ -32,7 +32,7 @@ class FoodController extends Controller
         {
             Alert::success('Success', session('success_message'));
         }
-        $foods = Food::latest()->paginate(5);
+        $foods = Food::latest()->paginate(10);
 
         $categories = Category::all();
 
@@ -76,8 +76,7 @@ class FoodController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'food_name' => 'required|unique:food,name',
-            'food_image' => 'required',
+            'food_name' => 'required|unique:food,name|max:20,name',
             'category_id' => 'required',          
             'price' => 'required',
             'description' => 'required',
@@ -85,6 +84,9 @@ class FoodController extends Controller
             'have' => 'required'
             
         ]);
+
+        $defaultImage = "defaultfood.jpg";
+
         
         $food = new Food();
         $food->name = $request->food_name;
@@ -101,6 +103,10 @@ class FoodController extends Controller
             $file_name = time().'.'.$extension;
             $file->move('uploads/foodImage/',$file_name);
             $food->food_image = $file_name;
+        }
+        else
+        {
+            $food->food_image = $defaultImage;
         }
         $food->save();
 

@@ -35,18 +35,9 @@
             <a href="{{url('foodlists')}}"><i class="fas fa-pizza-slice"></i></a>
             <a href="{{url('/cart/show')}}"><i class="fas fa-shopping-bag"></i></a>
             <a href="{{ route('view_order_history',['user_id'=>Auth::user()->id]) }}"><i class="fas fa-history"></i></a>
+            <a href="" data-toggle="modal" data-target="#LogoutModal"><i class="fas fa-sign-out-alt"></i></a>
             
             {{-- <a href="{{ url('/user/'.Auth::user()->id.'/editprofile') }}"><i class="fas fa-user-alt"></i></a> --}}
-            <a href="{{ route('logout') }}"
-                onclick="
-                event.preventDefault();
-                document.getElementById('logout-form').submit();">
-                <i class="fas fa-sign-out-alt"></i>
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
 
 
         </nav>
@@ -74,6 +65,7 @@
     </section>
     
     <!-- footer section end -->
+    @include('layouts.logout')
     <script src="/js/welcome.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

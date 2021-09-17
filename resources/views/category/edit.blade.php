@@ -31,8 +31,13 @@
                     <br>
                         
                         <label>
-                            
-                          <img src="{{ asset('uploads/categoryImage/'.$category->category_image) }}" class="imagePreview{{$category->uuid}}">
+                         
+                          @if ($category->category_image == 'defaultfood.jpg')
+                          <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}" class="imagePreview{{$category->uuid}}">   
+                          @else
+                          <img src="{{ asset('uploads/categoryImage/'.$category->category_image) }}" class="imagePreview{{$category->uuid}}">  
+                          @endif
+                          
                             
                         </label>                       
           </div>

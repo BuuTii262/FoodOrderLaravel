@@ -24,7 +24,7 @@ class UserController extends Controller
         {
             Alert::success('Success', session('success_message'));
         }
-        $users = User::paginate(5);
+        $users = User::latest()->paginate(10);
         $roles = Role::all();
         Session::put('tasks_url', request()->fullUrl());
         return view('user.index',compact('users','roles'));
