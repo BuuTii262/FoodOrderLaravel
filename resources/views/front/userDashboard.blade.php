@@ -24,7 +24,7 @@
                 @endforeach 
             </div>
 
-            <img src="{{ asset('uploads/images/home-img.png') }}" alt="">
+            <img src="{{ asset('uploads/images/food4.gif') }}" alt="">
         </div>
         
     </section>
