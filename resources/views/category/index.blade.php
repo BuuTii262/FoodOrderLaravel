@@ -1,96 +1,103 @@
 @extends('layouts.master')
 @section('content')
-<div class="jumbotron text-center bg-dark">
-    <h1 class="text-white"><i class='bx bx-food-menu'></i></h1>
-    <h2 class="text-white">Category</h2>
-    <div class="float-right mr-5">
-        <a href="" class="btn btn-primary btnAdd" data-toggle="modal" data-target="#myModal">Add New</a>
+
+
+<div class="jumbotron text-center bg-dark" style="border-radius: 0px;">
+    <a class="text-white h1" href="{{url('/category')}}"><i class="fas fa-list-alt"></i></a>
+    <h3 class="text-white">Category</h3>
+    <div class="d-flex float-right mr-3 mt-3">
+        <form action="/searchcategory" method="GET">                    
+            <div class="input-group class="float-left">
+                <input type="text" class="form-control bg-dark text-white border border-white border-top-0 border-left-0 border-right-0" name="search"
+                placeholder="Enter name to search" value="{{ old('search') }}">
+                <span class="input-group-prepend">
+                    <button type="submit" class="btn text-dark bg-white rounded-circle"><i class='bx bx-search-alt'></i></button>
+                </span>            
+            </div>                    
+        </form>
+        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+        <a href="" class="btn btn-md bg-white text-dark btnAdd" data-toggle="modal" 
+        data-target="#AddModal"><i class='bx bx-plus-circle'></i> Add New</a>
+        
     </div>
 </div>
 
-      <table class="table">
-        <thead>
-            <tr>             
+@include('category.create')
+
+@error('category_name')
+    <div class="alert alert-danger alert-dismissibel show fade text-center">
+        <strong>{{ $message }}</strong>
+        <button class="close" data-dismiss="alert">&times;</button>
+    </div> 
+@enderror          
+  <div class="table-responsive"> 
+      <table class="table table-hover">
+        <thead class="bg-dark text-white">
+            <tr>
+                         
                 <th>NAME</th>
                 <th>IMAGE</th>
                 <th>STATUS</th>
-                <th colspan="2">Action</th>
+                @foreach(Auth::user()->roles as $role)
+                    @if($role->name == 'Admin')
+                        <th>Action</th>
+                    @endif
+                @endforeach    
             </tr>
         </thead>
         <tbody>
+
+        @foreach($categories as $category)
+                        <tr>
+                            
+                            <td>{{ $category->name }}</td>
+                            <td>
+                                @if($category->category_image == 'defaultfood.jpg')
+                                <img src="{{ asset('defaultPhoto/defaultfood.jpg') }}"  
+                                    class="border border-dark image_list">
+                                    
+                                @else                                
+  
+                                    <img src="{{ asset('uploads/categoryImage/'.$category->category_image) }}" 
+                                    class="border border-dark image_list">
+                              
+                                @endif
+                                
+                            </td>
+                            <td>{{ $category->status }}</td>
+                            <!-- user with admin role can see and edit -->
+                            @foreach(Auth::user()->roles as $role)
+                                @if($role->name == 'Admin')
+                                    <td>
+                                        
+                                            
+                                            <button type="button" class="btn btn-warning btn-sm" 
+                                            data-toggle="modal" data-target="#EditModal{{$category->uuid}}">
+                                            <i class='bx bx-edit-alt'></i> Edit
+                                            </button>
+                                            
+                                            <button type="submit" class="btn btn-danger btn-sm" 
+                                            data-toggle="modal" data-target="#DeleteModal{{$category->uuid}}">
+                                            <i class='bx bx-trash'></i> Delete</button>
+                                        
+                                    </td>
+                                    @include('category.edit')
+                                    @include('category.delete')
+
+
+                                @endif
+                            @endforeach
+                        </tr>
+                        @endforeach
             
         </tbody>
 
       </table>
-
-
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Add Category</h4>
+      <div class="pagination-block d-flex justify-content-center">
+      {{ $categories->links('layouts.paginationlink') }}
       </div>
-      <div class="modal-body">
-
-
-      <form action="category" method="POST" id="form">
-          @csrf
-          <div class="form group">
-              <label>Category Name</label>
-              <input type="text" name="category_name" class="form-control" id="name">
-          </div>
-          <br>
-
-          <div class="form-elememt">
-                    <label for="file">Food Image</label><br>
-                        <input type="file" id="file-1" name="food_image" 
-                        class="form-control @error('food_image') is-invalid @enderror">
-                        @error('food_image')
-                        <div class="invalid-feedback" style="color: red;">Upload Image !</div>
-                        @enderror 
-                        
-                        <label for="file-1" id="file-1-preview">
-                            <img src="{{ asset('defaultPhoto/jisoo.jpg') }}">
-                            <div>
-                                <span>+</span>
-                            </div>
-                    </label>
-                        
-          </div>
-
-                    <br>
-          
-          <div class="form group">
-              <label>Status</label>
-              <div class="form-check">
-                <input type="radio" class="form-check-input" name="status" value="yes">
-                <label class="form-check-label">
-                  Yes
-                </label>
-                &nbsp; &nbsp; &nbsp;
-                <input type="radio" class="form-check-input" name="status" value="no">
-                <label class="form-check-label">
-                  No
-                </label>
-              </div>
-          </div>
-          <br>
-          <hr>
-
-          <div class="form group">
-              <input type="submit" name="submit" class="btn btn-success" value="Save">
-              <button type="button" class="btn btn-default bg-danger text-white" data-dismiss="modal">Close</button>
-          </div>
-
-      </form>
-</div>
-    </div>
-
-  </div>
-</div>
-
+  </div>    
+  
 <script>
 
     function previewBeforeUpload(id){
@@ -108,7 +115,11 @@
     }
     previewBeforeUpload("file-1");
 
+
+
+
     </script>
+
 
 
 @endsection
