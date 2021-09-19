@@ -11,6 +11,7 @@
         </div>
 
         <div class="image">
+            <br><br><br><br><br><br>
             <div style="text-align: right;"> 
                 @foreach(Auth::user()->roles as $role)
                     @if($role->name == 'Admin')
@@ -24,6 +25,7 @@
                 @endforeach 
             </div>
 
+            {{-- <img src="{{ asset('uploads/images/home-img.png') }}" alt=""> --}}
             <img src="{{ asset('uploads/images/food4.gif') }}" alt="">
         </div>
         
@@ -119,7 +121,7 @@
                     <img src="{{asset('uploads/foodImage/'.$food->food_image)}}" alt="">
                     <div class="content">
                         <h3>{{$food->name}}</h3>
-                        <p>{{$food->description}}</p>
+                        <p>{{$food->price}} MMK</p>
                         @if ($food->have == "Yes")
                         <form action="{{ route('add_to_cart') }}" method="post">
                             @csrf 
