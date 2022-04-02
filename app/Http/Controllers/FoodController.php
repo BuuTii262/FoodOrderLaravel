@@ -22,14 +22,12 @@ class FoodController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('isAdminOrStaff');  
-       
+        $this->middleware('isAdminOrStaff');
     }
 
     public function index()
     {
-        if(session('success_message'))
-        {
+        if (session('success_message')) {
             Alert::success('Success', session('success_message'));
         }
         $foods = Food::latest()->paginate(10);
@@ -37,24 +35,20 @@ class FoodController extends Controller
         $categories = Category::all();
 
         Session::put('tasks_url', request()->fullUrl());
-          
-        
-        return view('food.index', compact('foods','categories'));
+
+
+        return view('food.index', compact('foods', 'categories'));
     }
 
     public function search(Request $request)
     {
         $search = $request->get('search');
 
-        $foods = Food::where('name','like','%'.$search.'%')->paginate(5);
+        $foods = Food::where('name', 'like', '%' . $search . '%')->paginate(10);
 
         $categories = Category::all();
 
-            return view('food.index',compact('foods','categories'));
-
-        
-
-
+        return view('food.index', compact('foods', 'categories'));
     }
 
     /**
@@ -77,17 +71,17 @@ class FoodController extends Controller
     {
         $request->validate([
             'food_name' => 'required|unique:food,name|max:20,name',
-            'category_id' => 'required',          
+            'category_id' => 'required',
             'price' => 'required',
             'description' => 'required',
             'status' => 'required',
             'have' => 'required'
-            
+
         ]);
 
         $defaultImage = "defaultfood.jpg";
 
-        
+
         $food = new Food();
         $food->name = $request->food_name;
         $food->category_id = $request->category_id;
@@ -96,21 +90,18 @@ class FoodController extends Controller
         $food->status = $request->status;
         $food->have = $request->have;
 
-        if($request->hasFile('food_image'))
-        {
+        if ($request->hasFile('food_image')) {
             $file = $request->file('food_image');
             $extension = $file->getClientOriginalExtension();
-            $file_name = time().'.'.$extension;
-            $file->move('uploads/foodImage/',$file_name);
+            $file_name = time() . '.' . $extension;
+            $file->move('uploads/foodImage/', $file_name);
             $food->food_image = $file_name;
-        }
-        else
-        {
+        } else {
             $food->food_image = $defaultImage;
         }
         $food->save();
 
-        if(session('tasks_url')){
+        if (session('tasks_url')) {
             return redirect(session('tasks_url'))->withSuccessMessage('Successfully Added New Food');
         }
         return redirect('/food')->withSuccessMessage("Successfully Added New Food");
@@ -149,10 +140,10 @@ class FoodController extends Controller
     {
         $request->validate([
             'food_name' => 'required',
-            'category_id' => 'required',          
+            'category_id' => 'required',
             'price' => 'required',
             'description' => 'required'
-            
+
         ]);
 
         $food = Food::find($id);
@@ -163,23 +154,21 @@ class FoodController extends Controller
         $food->status = $request->status;
         $food->have = $request->have;
 
-        if($request->hasFile('food_image'))
-        {
-            $destination = 'uploads/foodImage/'. $food->food_image;
-            if(File::exists($destination))
-            {
+        if ($request->hasFile('food_image')) {
+            $destination = 'uploads/foodImage/' . $food->food_image;
+            if (File::exists($destination)) {
                 File::delete($destination);
             }
             $file = $request->file('food_image');
             $extension = $file->getClientOriginalExtension();
-            $file_name = "food".time().'.'.$extension;
-            $file->move('uploads/foodImage/',$file_name);
+            $file_name = "food" . time() . '.' . $extension;
+            $file->move('uploads/foodImage/', $file_name);
             $food->food_image = $file_name;
         }
-        
+
         $food->update();
 
-        if(session('tasks_url')){
+        if (session('tasks_url')) {
             return redirect(session('tasks_url'))->withSuccessMessage('Successfully Updated Food Data');
         }
         return redirect('/food')->withSuccessMessage('Successfully Updated Food Data');
@@ -194,13 +183,12 @@ class FoodController extends Controller
     public function destroy($id)
     {
         $food = Food::find($id);
-        $destination = 'uploads/foodImage/'.$food->food_image;
-        {
+        $destination = 'uploads/foodImage/' . $food->food_image; {
             File::delete($destination);
         }
         $food->delete();
 
-        if(session('tasks_url')){
+        if (session('tasks_url')) {
             return redirect(session('tasks_url'))->withSuccessMessage('Successfully Deleted');
         }
         return redirect('/food')->withSuccessMessage('Successfully Deleted');
