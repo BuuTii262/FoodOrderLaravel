@@ -45,7 +45,7 @@
         
         <div class="content">
             <h3>Welcome From Our Restourant</h3>
-            <p>Enjoy fresh and delicious Foods, Enjoy fresh and delicious Foods, Enjoy fresh and delicious Foods, Enjoy fresh and delicious Foods,Enjoy fresh and delicious Foods,Enjoy fresh and delicious Foods.</p>
+            <p>Enjoy fresh and delicious Foods.</p>
             <a href="{{url('login')}}" class="btn">Start Now</a>
         </div>
 
